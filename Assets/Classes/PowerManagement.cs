@@ -5,7 +5,8 @@ using UnityEngine;
 public class PowerManagement : MonoBehaviour
 {
     ObstaclesScript obstacle; 
-    public bool strengthUnlocked; 
+    public bool strengthUnlocked;
+    bool canMove; 
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,10 @@ public class PowerManagement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(canMove && Input.GetKeyDown(KeyCode.K))
+        {
+            obstacle.coroutineNumber = 1;
+        }
     }
 
     //private void OnCollisionEnter2D(Collision2D collision)
@@ -44,8 +48,8 @@ public class PowerManagement : MonoBehaviour
             Debug.Log(obstacle);
             if (strengthUnlocked)
             {
-
-                obstacle.coroutineNumber = 1;
+                canMove = true; 
+                
 
             }
         }

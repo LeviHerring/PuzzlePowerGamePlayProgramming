@@ -28,7 +28,8 @@ public class ObstaclesScript : MonoBehaviour
     public IEnumerator ObjectMove()
     {
         rigidbody.velocity = new Vector2(10, 0);
-        yield return new WaitForSecondsRealtime(3f);
-        rigidbody.velocity = new Vector2(0, 0); 
+        yield return new WaitForSecondsRealtime(1f);
+        rigidbody.velocity = new Vector2(0, 0);
+        coroutineNumber = 0; 
     }
 }
