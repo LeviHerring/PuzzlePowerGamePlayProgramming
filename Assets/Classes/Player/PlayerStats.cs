@@ -22,6 +22,19 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Experience(); 
+    }
+
+
+    void Experience()
+    {
+        if(xpAmount >= maxXp)
+        {
+            
+            xpLevel++;
+            xpAmount = 0; 
+            maxXp += 5; 
+
+        }
     }
 }
