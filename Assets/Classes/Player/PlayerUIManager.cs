@@ -28,6 +28,6 @@ public class PlayerUIManager : MonoBehaviour
         float xpAmountFloat = playerStats.xpAmount;
         float maxXpFloat = playerStats.maxXp; 
         xpBar.fillAmount = (xpAmountFloat / maxXpFloat);
-        Debug.Log(xpBar.fillAmount); 
+        //Debug.Log(xpBar.fillAmount); 
     }    
 }

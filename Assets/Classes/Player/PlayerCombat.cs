@@ -6,11 +6,24 @@ public class PlayerCombat : MonoBehaviour
 {
     public GameObject[] hitboxes;
     int hitboxNumber;
-    public bool canAttack; 
+    public bool canAttack;
+    public bool hasWeapon;
+    public WeaponTypes types;
     // Start is called before the first frame update
+
+
+
     void Start()
     {
         
+    }
+
+    public enum WeaponTypes
+    {
+        Sword,
+        Broadsword,
+        Bustersword,
+        OtherSword
     }
 
     // Update is called once per frame
@@ -23,15 +36,27 @@ public class PlayerCombat : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.P) && canAttack)
         {
-            hitboxNumber = 0;
-            StartCoroutine(AttackCoroutine());
-            StartCoroutine(Cooldown());
+            if(!hasWeapon)
+            {
+                hitboxNumber = 0;
+                StartCoroutine(AttackCoroutine());
+                StartCoroutine(Cooldown());
+            }
+            if (hasWeapon)
+            {
+               
+            }
+          
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
-            hitboxNumber = 1;
-            StartCoroutine(AttackCoroutine());
-            StartCoroutine(Cooldown());
+            if(!hasWeapon)
+            {
+                hitboxNumber = 1;
+                StartCoroutine(AttackCoroutine());
+                StartCoroutine(Cooldown());
+            }
+        
         }
     }
 

@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Moveable
   - Hitbox
+  - Weapon
   layers:
   - Default
   - TransparentFX
