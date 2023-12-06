@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline;
 using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
@@ -9,7 +10,11 @@ public class EnemyMove : MonoBehaviour
     Collider2D collider;
     bool move = true;
     Vector3 pointA;
-    Vector3 pointB; 
+    Vector3 pointB;
+    RaycastHit2D hit;
+    Ray ray;
+    GameObject player; 
+    [SerializeField] Transform rayCastTransform; 
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +38,9 @@ public class EnemyMove : MonoBehaviour
         {
             case "goblin":
                 StartCoroutine(GoblinMoving()); 
-               
+                break;
+            case "chasergoblin":
+                StartCoroutine(ChaserGoblinMoving());
                 break; 
         }
     }
@@ -50,4 +57,39 @@ public class EnemyMove : MonoBehaviour
         yield return new WaitForSeconds(0.5f); 
 
     }
+
+    IEnumerator ChaserGoblinMoving()
+    {
+
+        //        rigidbody.velocity = new Vector2(enemyScript.speed, rigidbody.velocity.y);
+        //        yield return new WaitForSeconds(5f);
+        //        rigidbody.velocity = new Vector2(-enemyScript.speed, rigidbody.velocity.y);
+        //        yield return new WaitForSeconds(5f);
+
+
+
+        RaycastHit2D hit = Physics2D.Raycast(rayCastTransform.position, new Vector2(4, 0) * new Vector2(1, 1), 1f); //Draws Raycast, always goes down for some reason? 
+        Debug.DrawRay(rayCastTransform.position, new Vector2(4,0) * new Vector2(1, 1), color: Color.red, 1f); 
+        if(hit.collider.gameObject.name == "Player")
+        {
+            Debug.Log("Yahoo!");
+            player = hit.collider.gameObject;
+            if(player.transform.position.x > transform.position.x)
+            {
+                transform.Translate(0.1f, 0, 0);
+            }
+        }
+        else
+        {
+            //float time = Mathf.PingPong(Time.time * enemyScript.speed, 1f);
+           // transform.position = Vector3.Lerp(pointA, pointB, time);
+            yield return new WaitForSeconds(0.1f);
+        }
+       
+        
+        
+
+
+    }
+
 }

@@ -6,12 +6,13 @@ public class PowerManagement : MonoBehaviour
 {
     ObstaclesScript obstacle; 
     public bool strengthUnlocked;
-    public bool[] powersUnlocked; //Strength = 0, 
+    public bool[] powersUnlocked = new bool[10]; //Strength = 0, 
     bool canMove;
     PlayerStats stats;
     // Start is called before the first frame update
     void Start()
-    { 
+    {
+        
         stats = GetComponent<PlayerStats>();
     }
 
@@ -22,7 +23,7 @@ public class PowerManagement : MonoBehaviour
         {
             obstacle.coroutineNumber = 1;
         }
-        //LevelChecker(); 
+        LevelChecker(); 
 
     }
 
@@ -65,14 +66,25 @@ public class PowerManagement : MonoBehaviour
         {
             case 2:
                 strengthUnlocked = true;
-                powersUnlocked[0] = true; 
+                powersUnlocked[0] = true;
+                //activates strength power 
                 break;
             case 5:
                 powersUnlocked[1] = true;
+                //unlocks super mario bros 2/doki doki panic type charged jump 
                 break;
             case 7:
                 powersUnlocked[2] = true;
-                break; 
+                //phase 
+                break;
+            case 10:
+                powersUnlocked[3] = true;
+                //activates 2 powers
+                break;
+            case 12:
+                powersUnlocked[4] = true;
+                //activates disguise 
+                break;
         }
     }
 }

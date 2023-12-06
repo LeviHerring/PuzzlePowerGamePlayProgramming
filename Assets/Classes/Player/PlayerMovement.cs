@@ -13,7 +13,8 @@ public class PlayerMovement : MonoBehaviour
     SpriteRenderer spriteRenderer; 
      bool isCharged; 
     bool isCharging;
-    [SerializeField] bool canDoubleJump; 
+    [SerializeField] bool canDoubleJump;
+    [SerializeField] bool isFacingRight; 
 
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Transform groundCheck; 
@@ -32,9 +33,10 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         Jump();
-        PowerControls(); 
+        PowerControls();
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(4, 0) * new Vector2(1, 1), 1f); //Draws Raycast, always goes down for some reason? 
+        Debug.DrawRay(transform.position, new Vector2(4, 0) * new Vector2(1, 1), color: Color.red, 1f);
 
-        
     }
 
     public bool GroundCheck()
@@ -47,10 +49,14 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             rigidbody.velocity = new Vector2(playerStats.speed, rigidbody.velocity.y);
+            isFacingRight = true;
+            Flip(1);
         }
         if (Input.GetKey(KeyCode.A))
         {
             rigidbody.velocity = new Vector2(-playerStats.speed, rigidbody.velocity.y);
+            isFacingRight = false;
+            Flip(-1); 
         }
     }
 
@@ -71,7 +77,9 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Key is up"); 
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, rigidbody.velocity.y * 0.5f);
-            
+            isCharged = false;
+            isCharging = false;
+
         }
         if(Input.GetKeyDown(KeyCode.Space) && !GroundCheck() && canDoubleJump)
         {
@@ -86,9 +94,22 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    void Flip(float flipValue)
+    {
+        if (isFacingRight)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(flipValue, 1, 1);
+        }
+        
+    }
+
     public void PowerControls()
     {
-        if(Input.GetKeyDown (KeyCode.S)) 
+        if(Input.GetKeyDown (KeyCode.S) && GroundCheck()) 
         {
             isCharging = true; 
            
@@ -116,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (powerManagement.powersUnlocked[2])
             {
+
                 StartCoroutine(PhaseCoroutine()); 
             }
         }
@@ -135,7 +157,15 @@ public class PlayerMovement : MonoBehaviour
         spriteRenderer.enabled = false;
         collider.enabled = false;
         yield return new WaitForSeconds(1f);
-        transform.Translate(5, 0, 0);
+        if (isFacingRight)
+        {
+            transform.Translate(5, 0, 0);
+        }
+        else
+        {
+            transform.Translate(-5, 0, 0);
+        }
+       
         rigidbody.constraints = RigidbodyConstraints2D.None;
         rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation; 
         spriteRenderer.enabled = true;

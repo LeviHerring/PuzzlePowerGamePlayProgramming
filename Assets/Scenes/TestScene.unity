@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &123345137
 Rigidbody2D:
   serializedVersion: 4
@@ -295,6 +295,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &243198123 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4087401236522277093, guid: 4c91678612065424999adfac3f9346e7, type: 3}
+  m_PrefabInstance: {fileID: 1894850619}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &318649422
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &430406554
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -868,7 +873,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &946098066
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1155,7 +1160,7 @@ Transform:
   m_GameObject: {fileID: 952793323}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.55, y: -3.73, z: 0}
+  m_LocalPosition: {x: 3.51, y: -3.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1176,6 +1181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canDoubleJump: 0
+  isFacingRight: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -1197,7 +1203,7 @@ MonoBehaviour:
   speed: 5
   jumpHeight: 10
   xpAmount: 0
-  xpLevel: 0
+  xpLevel: 2
   maxXp: 10
 --- !u!114 &952793330
 MonoBehaviour:
@@ -1211,8 +1217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b41b9d43a76e05c46b541ee06895f67d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strengthUnlocked: 1
-  powersUnlocked: 010101
+  strengthUnlocked: 0
+  powersUnlocked: 0000000000
 --- !u!114 &952793331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1438,6 +1444,79 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xpBar: {fileID: 757607392}
+--- !u!1001 &1894850619
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 204770716588306877, guid: 4c91678612065424999adfac3f9346e7, type: 3}
+      propertyPath: enemyName
+      value: ChaserGoblin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262885961792254676, guid: 4c91678612065424999adfac3f9346e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262885961792254676, guid: 4c91678612065424999adfac3f9346e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262885961792254676, guid: 4c91678612065424999adfac3f9346e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262885961792254676, guid: 4c91678612065424999adfac3f9346e7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262885961792254676, guid: 4c91678612065424999adfac3f9346e7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262885961792254676, guid: 4c91678612065424999adfac3f9346e7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262885961792254676, guid: 4c91678612065424999adfac3f9346e7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262885961792254676, guid: 4c91678612065424999adfac3f9346e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262885961792254676, guid: 4c91678612065424999adfac3f9346e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2262885961792254676, guid: 4c91678612065424999adfac3f9346e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087401236522277093, guid: 4c91678612065424999adfac3f9346e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087401236522277093, guid: 4c91678612065424999adfac3f9346e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4290512432858276605, guid: 4c91678612065424999adfac3f9346e7, type: 3}
+      propertyPath: rayCastTransform
+      value: 
+      objectReference: {fileID: 243198123}
+    - target: {fileID: 5906419252369412013, guid: 4c91678612065424999adfac3f9346e7, type: 3}
+      propertyPath: m_Name
+      value: ChaserGoblin
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c91678612065424999adfac3f9346e7, type: 3}
 --- !u!1 &1971603059
 GameObject:
   m_ObjectHideFlags: 0
@@ -1768,3 +1847,4 @@ SceneRoots:
   - {fileID: 2035158168}
   - {fileID: 946098068}
   - {fileID: 430406556}
+  - {fileID: 1894850619}
