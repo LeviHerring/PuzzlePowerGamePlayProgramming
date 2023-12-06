@@ -6,11 +6,13 @@ public class PowerManagement : MonoBehaviour
 {
     ObstaclesScript obstacle; 
     public bool strengthUnlocked;
-    bool canMove; 
+    public bool[] powersUnlocked; //Strength = 0, 
+    bool canMove;
+    PlayerStats stats;
     // Start is called before the first frame update
     void Start()
-    {
-        
+    { 
+        stats = GetComponent<PlayerStats>();
     }
 
     // Update is called once per frame
@@ -20,6 +22,8 @@ public class PowerManagement : MonoBehaviour
         {
             obstacle.coroutineNumber = 1;
         }
+        //LevelChecker(); 
+
     }
 
     //private void OnCollisionEnter2D(Collision2D collision)
@@ -52,6 +56,23 @@ public class PowerManagement : MonoBehaviour
                 
 
             }
+        }
+    }
+
+    void LevelChecker()
+    {
+        switch (stats.xpLevel)
+        {
+            case 2:
+                strengthUnlocked = true;
+                powersUnlocked[0] = true; 
+                break;
+            case 5:
+                powersUnlocked[1] = true;
+                break;
+            case 7:
+                powersUnlocked[2] = true;
+                break; 
         }
     }
 }

@@ -1175,6 +1175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7415f8591b1c86243a059e9d8a56bf2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDoubleJump: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -1211,6 +1212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strengthUnlocked: 1
+  powersUnlocked: 010101
 --- !u!114 &952793331
 MonoBehaviour:
   m_ObjectHideFlags: 0
