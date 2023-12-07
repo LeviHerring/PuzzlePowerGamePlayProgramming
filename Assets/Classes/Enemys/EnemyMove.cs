@@ -68,9 +68,14 @@ public class EnemyMove : MonoBehaviour
 
 
 
-        RaycastHit2D hit = Physics2D.Raycast(rayCastTransform.position, new Vector2(4, 0) * new Vector2(1, 1), 1f); //Draws Raycast, always goes down for some reason? 
-        Debug.DrawRay(rayCastTransform.position, new Vector2(4,0) * new Vector2(1, 1), color: Color.red, 1f); 
-        if(hit.collider.gameObject.name == "Player")
+        RaycastHit2D hit = Physics2D.Raycast(rayCastTransform.position, new Vector2(4, 0) * new Vector2(1, 1), 1f);
+        //Draws Raycast, always goes down for some reason? 
+        Debug.DrawRay(rayCastTransform.position, new Vector2(4,0) * new Vector2(1, 1), color: Color.red, 1f);
+        yield return new WaitForSeconds(2f);
+        hit = Physics2D.Raycast(rayCastTransform.position, new Vector2(-4, 0) * new Vector2(1, 1), 1f);
+        Debug.DrawRay(rayCastTransform.position, new Vector2(-4, 0) * new Vector2(1, 1), color: Color.red, 1f);
+        yield return new WaitForSeconds(2f); 
+        if (hit.collider.gameObject.name == "Player")
         {
             Debug.Log("Yahoo!");
             player = hit.collider.gameObject;
@@ -78,12 +83,16 @@ public class EnemyMove : MonoBehaviour
             {
                 transform.Translate(0.1f, 0, 0);
             }
+            if (player.transform.position.x < transform.position.x)
+            {
+                transform.Translate(-0.1f, 0, 0);
+            }
         }
         else
         {
             //float time = Mathf.PingPong(Time.time * enemyScript.speed, 1f);
-           // transform.position = Vector3.Lerp(pointA, pointB, time);
-            yield return new WaitForSeconds(0.1f);
+            // transform.position = Vector3.Lerp(pointA, pointB, time);
+            yield return new WaitForSeconds(5f);
         }
        
         
