@@ -10,7 +10,8 @@ public class PlayerStats : MonoBehaviour
     public float jumpHeight;
     public int xpAmount;
     public int xpLevel;
-    public int maxXp; 
+    public int maxXp;
+    public bool hasWeapon; 
 
 
     // Start is called before the first frame update

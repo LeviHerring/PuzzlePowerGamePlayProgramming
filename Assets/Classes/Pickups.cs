@@ -12,13 +12,13 @@ public class Pickups : MonoBehaviour
     GameObject player;
     public SpriteRenderer spriteRenderer;
     [SerializeField] public bool isEquipped;
-    public string name; 
+    new public string name; 
     
     // Start is called before the first frame update
     public void Start()
     {
         myTransform = GetComponent<Transform>(); 
-        spriteRenderer = GetComponent<SpriteRenderer>(); 
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
 
@@ -36,29 +36,51 @@ public class Pickups : MonoBehaviour
             player = collision.gameObject; 
             Debug.Log("Collision"); 
             newParent = player.transform;
-
-            myTransform.parent = newParent;
-            
-            StartCoroutine(FlickerAnimation());
-            player.GetComponent<PlayerCombat>().hasWeapon = true;
-            switch (name)
+            if(player.GetComponent<PlayerCombat>().hasWeapon == true)
             {
-                case "Sword":
-                    player.GetComponent<PlayerCombat>().types = PlayerCombat.WeaponTypes.Sword;
-                    break;
-                case "Bustersword":
-                    player.GetComponent<PlayerCombat>().types = PlayerCombat.WeaponTypes.Bustersword;
-                    break; 
-                case "Broadsword":
-                    player.GetComponent<PlayerCombat>().types = PlayerCombat.WeaponTypes.Broadsword;
-                    break;
-                case "Othersword":
-                    player.GetComponent<PlayerCombat>().types = PlayerCombat.WeaponTypes.OtherSword;
-                    break;
+                if(player.GetComponentInChildren<Pickups>().name == gameObject.name) 
+                {
+                    Object.Destroy(gameObject);
+                }
+                else
+                {
+                    Destroy(player.GetComponentInChildren<Pickups>().gameObject);
+                    isEquipped = true;
+                    player.GetComponent<PlayerCombat>().hasWeapon = true;
+                    myTransform.parent = newParent;
+                    StartCoroutine(FlickerAnimation());
+                }
+                //checks what weapon player is holding and does stuff depending on that 
 
+               
             }
-           
-            isEquipped = true; 
+            else
+            {
+                switch (name)
+                {
+                    case "Sword":
+                        player.GetComponent<PlayerCombat>().types = PlayerCombat.WeaponTypes.Sword;
+                        break;
+                    case "Bustersword":
+                        player.GetComponent<PlayerCombat>().types = PlayerCombat.WeaponTypes.Bustersword;
+                        break;
+                    case "Broadsword":
+                        player.GetComponent<PlayerCombat>().types = PlayerCombat.WeaponTypes.Broadsword;
+                        break;
+                    case "Othersword":
+                        player.GetComponent<PlayerCombat>().types = PlayerCombat.WeaponTypes.OtherSword;
+                        break;
+
+                }
+
+                isEquipped = true;
+                player.GetComponent<PlayerCombat>().hasWeapon = true;
+                myTransform.parent = newParent;
+
+                StartCoroutine(FlickerAnimation());
+            }
+            
+          
 
 
         }
@@ -76,6 +98,7 @@ public class Pickups : MonoBehaviour
                     }
                     else
                     {
+                        GetComponentInParent<PlayerCombat>().hasWeapon = false; 
                         Object.Destroy(gameObject);
                         
                     }
@@ -102,4 +125,6 @@ public class Pickups : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         spriteRenderer.enabled = true;
     }
+
+   
 }

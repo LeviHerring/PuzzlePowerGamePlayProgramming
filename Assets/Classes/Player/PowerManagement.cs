@@ -7,6 +7,7 @@ public class PowerManagement : MonoBehaviour
     ObstaclesScript obstacle; 
     public bool strengthUnlocked;
     public bool[] powersUnlocked = new bool[10]; //Strength = 0, 
+    public bool[] itemsUnlocked = new bool[10]; 
     bool canMove;
     PlayerStats stats;
     public GameObject mask;

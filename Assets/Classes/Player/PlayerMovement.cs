@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody2D rigidbody;
-    BoxCollider2D collider; 
+    new Rigidbody2D rigidbody;
+    new BoxCollider2D collider; 
     PlayerStats playerStats;
     PowerManagement powerManagement;
     SpriteRenderer spriteRenderer; 
@@ -19,7 +19,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Transform groundCheck;
     public bool hasPutMaskOn;
-    Transform mask; 
+    Transform mask;
+    public GameObject Mappanel; 
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         Move();
         Jump();
         PowerControls();
-        
+        ItemControls(); 
 
     }
 
@@ -76,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Space) && rigidbody.velocity.y > 0f)
         {
-            Debug.Log("Key is up"); 
+            //Debug.Log("Key is up"); 
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, rigidbody.velocity.y * 0.5f);
             isCharged = false;
             isCharging = false;
@@ -110,19 +111,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void PowerControls()
     {
-        if(Input.GetKeyDown (KeyCode.S) && GroundCheck()) 
+        if(Input.GetKeyDown (KeyCode.S) && GroundCheck() && powerManagement.powersUnlocked[1]) 
         {
             isCharging = true; 
            
         }
         if (Input.GetKeyDown(KeyCode.Space) && isCharging == true)
         {
-            if (powerManagement.powersUnlocked[1])
-            {
-
                 StartCoroutine(ChargeJump());
-
-            }
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
@@ -160,6 +156,26 @@ public class PlayerMovement : MonoBehaviour
                 }
                 //disguise 
             }
+        }
+    }
+
+    void ItemControls()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && powerManagement.itemsUnlocked[0] == true)
+        {
+            Debug.Log("Map");
+            Mappanel.SetActive(true);
+            
+        }
+        else if(Input.GetKeyDown(KeyCode.Mouse0) && powerManagement.itemsUnlocked[0] == false)
+        {
+            Debug.Log("No Maps");
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse1) && powerManagement.itemsUnlocked[0] == true)
+        {
+            Debug.Log("Map");
+            Mappanel.SetActive(false);
+
         }
     }
 

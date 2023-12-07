@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ObstaclesScript : MonoBehaviour
 {
-    public int coroutineNumber; 
-    Rigidbody2D rigidbody;
-    Collider2D collider; 
+    public int coroutineNumber;
+    new Rigidbody2D rigidbody;
+    new Collider2D collider; 
     // Start is called before the first frame update
     void Start()
     {

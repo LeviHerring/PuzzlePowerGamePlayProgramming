@@ -6,8 +6,8 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour
 {
     PARENTENEMY enemyScript;
-    Rigidbody2D rigidbody;
-    Collider2D collider;
+    new Rigidbody2D rigidbody;
+    new Collider2D collider;
     bool move = true;
     Vector3 pointA;
     Vector3 pointB;
@@ -81,6 +81,10 @@ public class EnemyMove : MonoBehaviour
             {
                 Debug.Log("Yahoo!");
                 player = hit.collider.gameObject;
+                if (player.gameObject.GetComponent<PlayerMovement>().hasPutMaskOn)
+                {
+                    yield break;
+                }
                 if (player.transform.position.x < transform.position.x)
                 {
                     Debug.Log("Left");
