@@ -14,10 +14,12 @@ public class PlayerMovement : MonoBehaviour
      bool isCharged; 
     bool isCharging;
     [SerializeField] bool canDoubleJump;
-    [SerializeField] bool isFacingRight; 
-
+    [SerializeField] bool isFacingRight;
+    public bool isDisguised; 
     [SerializeField] LayerMask groundLayer;
-    [SerializeField] Transform groundCheck; 
+    [SerializeField] Transform groundCheck;
+    public bool hasPutMaskOn;
+    Transform mask; 
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +36,7 @@ public class PlayerMovement : MonoBehaviour
         Move();
         Jump();
         PowerControls();
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(4, 0) * new Vector2(1, 1), 1f); //Draws Raycast, always goes down for some reason? 
-        Debug.DrawRay(transform.position, new Vector2(4, 0) * new Vector2(1, 1), color: Color.red, 1f);
+        
 
     }
 
@@ -139,6 +140,25 @@ public class PlayerMovement : MonoBehaviour
             {
 
                 StartCoroutine(PhaseCoroutine()); 
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            if (powerManagement.powersUnlocked[4])
+            {
+                if(hasPutMaskOn == false)
+                {
+                    mask = gameObject.transform.Find("Mask(Clone)");
+                    mask.gameObject.SetActive(true); 
+                    hasPutMaskOn = true; 
+                }
+                else
+                {
+                    mask.gameObject.SetActive(false);
+                    hasPutMaskOn = false; 
+                }
+                //disguise 
             }
         }
     }

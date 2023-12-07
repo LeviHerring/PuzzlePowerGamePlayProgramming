@@ -9,6 +9,8 @@ public class PowerManagement : MonoBehaviour
     public bool[] powersUnlocked = new bool[10]; //Strength = 0, 
     bool canMove;
     PlayerStats stats;
+    public GameObject mask;
+    bool hasInstanstiated;
     // Start is called before the first frame update
     void Start()
     {
@@ -83,8 +85,25 @@ public class PowerManagement : MonoBehaviour
                 break;
             case 12:
                 powersUnlocked[4] = true;
+                InstanstiateMask(); 
                 //activates disguise 
                 break;
+        }
+    }
+
+    void InstanstiateMask()
+    {
+        
+        if(hasInstanstiated == false)
+        {
+            Instantiate(mask, this.transform);
+            mask.transform.Find("Mask(Clone)");
+            mask.gameObject.SetActive(false);
+            hasInstanstiated = true;
+        }
+        else
+        {
+            return; 
         }
     }
 }

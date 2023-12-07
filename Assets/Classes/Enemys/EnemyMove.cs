@@ -14,7 +14,8 @@ public class EnemyMove : MonoBehaviour
     RaycastHit2D hit;
     Ray ray;
     GameObject player; 
-    [SerializeField] Transform rayCastTransform; 
+    [SerializeField] Transform rayCastLeftTransform;
+    [SerializeField] Transform rayCastRightTransform;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,29 +68,50 @@ public class EnemyMove : MonoBehaviour
         //        yield return new WaitForSeconds(5f);
 
 
-
-        RaycastHit2D hit = Physics2D.Raycast(rayCastTransform.position, new Vector2(4, 0) * new Vector2(1, 1), 1f);
+        RaycastHit2D rightHit = Physics2D.Raycast(rayCastRightTransform.position, new Vector2(100, 0) * new Vector2(1, 1), 100f);
         //Draws Raycast, always goes down for some reason? 
-        Debug.DrawRay(rayCastTransform.position, new Vector2(4,0) * new Vector2(1, 1), color: Color.red, 1f);
-        yield return new WaitForSeconds(2f);
-        hit = Physics2D.Raycast(rayCastTransform.position, new Vector2(-4, 0) * new Vector2(1, 1), 1f);
-        Debug.DrawRay(rayCastTransform.position, new Vector2(-4, 0) * new Vector2(1, 1), color: Color.red, 1f);
+        //Debug.DrawRay(rayCastTransform.position, new Vector2(4,0) * new Vector2(1, 1), color: Color.red, 1f);
+       yield return new WaitForSeconds(2f);
+        hit = Physics2D.Raycast(rayCastLeftTransform.position, new Vector2(-100, 0), 100f);
+        Debug.DrawRay(rayCastLeftTransform.position, new Vector2(-100, 0), color: Color.red, 0.5f);
         yield return new WaitForSeconds(2f); 
-        if (hit.collider.gameObject.name == "Player")
+        if (hit.collider)
         {
-            Debug.Log("Yahoo!");
-            player = hit.collider.gameObject;
-            if(player.transform.position.x > transform.position.x)
+            if(hit.collider.gameObject.name == "Player")
             {
-                transform.Translate(0.1f, 0, 0);
+                Debug.Log("Yahoo!");
+                player = hit.collider.gameObject;
+                if (player.transform.position.x < transform.position.x)
+                {
+                    Debug.Log("Left");
+                    rigidbody.velocity = new Vector2(-5, rigidbody.velocity.y);
+                }
             }
-            if (player.transform.position.x < transform.position.x)
+         
+        }
+        if(rightHit.collider)
+        {
+            if(rightHit.collider.gameObject.name == "Player")
             {
-                transform.Translate(-0.1f, 0, 0);
+                if(rightHit.collider.gameObject.GetComponent<PlayerMovement>().hasPutMaskOn)
+                {
+                    yield break; 
+                }
+                else
+                {
+                    if (rightHit.collider.gameObject.transform.position.x > transform.position.x)
+                    {
+                        rigidbody.velocity = new Vector2(5, rigidbody.velocity.y);
+                        
+                    }
+                }
+               
+                
             }
         }
         else
         {
+            player = null;
             //float time = Mathf.PingPong(Time.time * enemyScript.speed, 1f);
             // transform.position = Vector3.Lerp(pointA, pointB, time);
             yield return new WaitForSeconds(5f);
