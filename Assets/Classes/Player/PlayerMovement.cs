@@ -20,7 +20,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform groundCheck;
     public bool hasPutMaskOn;
     Transform mask;
-    public GameObject Mappanel; 
+    public GameObject mapPanel;
+    public GameObject bomb; 
     // Start is called before the first frame update
     void Start()
     {
@@ -164,18 +165,18 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && powerManagement.itemsUnlocked[0] == true)
         {
             Debug.Log("Map");
-            Mappanel.SetActive(true);
+            mapPanel.SetActive(true);
+            Time.timeScale = 0f;  
             
         }
         else if(Input.GetKeyDown(KeyCode.Mouse0) && powerManagement.itemsUnlocked[0] == false)
         {
             Debug.Log("No Maps");
         }
-        if (Input.GetKeyDown(KeyCode.Mouse1) && powerManagement.itemsUnlocked[0] == true)
-        {
-            Debug.Log("Map");
-            Mappanel.SetActive(false);
 
+        if(Input.GetKeyDown(KeyCode.U) && powerManagement.itemsUnlocked[1] == true)
+        {
+            Instantiate(bomb, transform.position, Quaternion.identity); 
         }
     }
 
