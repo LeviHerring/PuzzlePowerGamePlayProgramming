@@ -21,7 +21,8 @@ public class PlayerMovement : MonoBehaviour
     public bool hasPutMaskOn;
     Transform mask;
     public GameObject mapPanel;
-    public GameObject bomb; 
+    public GameObject bomb;
+    public GameObject Drone; 
     // Start is called before the first frame update
     void Start()
     {
@@ -177,6 +178,11 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.U) && powerManagement.itemsUnlocked[1] == true)
         {
             Instantiate(bomb, transform.position, Quaternion.identity); 
+        }
+
+        if(Input.GetKeyDown(KeyCode.M) && powerManagement.itemsUnlocked[2] == true)
+        {
+            Instantiate(Drone, transform.position, Quaternion.identity);
         }
     }
 

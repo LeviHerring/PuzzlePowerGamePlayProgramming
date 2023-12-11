@@ -8,7 +8,8 @@ public class PlayerUIManager : MonoBehaviour
 {
     GameObject player; 
     PlayerStats playerStats;
-    public Image xpBar; 
+    public Image xpBar;
+    public GameObject[] panels; 
     
     // Start is called before the first frame update
     void Start()
