@@ -16,6 +16,7 @@ public class EnemyMove : MonoBehaviour
     GameObject player; 
     [SerializeField] Transform rayCastLeftTransform;
     [SerializeField] Transform rayCastRightTransform;
+    Vector2 wingedBatVector = new Vector2(3f, 0f); 
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,7 @@ public class EnemyMove : MonoBehaviour
         collider = GetComponent<Collider2D>();
         pointA = new Vector3(transform.position.x + 5, transform.position.y, transform.position.z);
         pointB = new Vector3(transform.position.x - 5, transform.position.y, transform.position.z);
+        wingedBatVector = new Vector2(3f, rigidbody.velocity.y);
     }
 
     // Update is called once per frame
@@ -42,6 +44,12 @@ public class EnemyMove : MonoBehaviour
                 break;
             case "chasergoblin":
                 StartCoroutine(ChaserGoblinMoving());
+                break;
+            case "gremlin":
+                GremlinMove(); 
+                break;
+            case "wings":
+                StartCoroutine(WingedGoblinMove());
                 break; 
         }
     }
@@ -125,6 +133,21 @@ public class EnemyMove : MonoBehaviour
         
 
 
+    }
+
+    public void GremlinMove()
+    {
+        rigidbody.velocity = new Vector2(-2, rigidbody.velocity.y); 
+    }
+
+    IEnumerator WingedGoblinMove()
+    {
+        rigidbody.velocity = wingedBatVector;
+        yield return new WaitForSeconds(1f); 
+        rigidbody.velocity = new Vector2(rigidbody.velocity.x, 1f); 
+        yield return new WaitForSeconds(1f);
+        rigidbody.velocity = new Vector2(rigidbody.velocity.x, -1f);
+        
     }
 
 }

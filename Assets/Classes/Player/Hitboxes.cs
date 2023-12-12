@@ -5,11 +5,11 @@ using UnityEngine;
 public class Hitboxes : MonoBehaviour
 {
     public int damage;
-    PlayerStats player; 
+    //PlayerStats player; 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+        //player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
 
     }
 
