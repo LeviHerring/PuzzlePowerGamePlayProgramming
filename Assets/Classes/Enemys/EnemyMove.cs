@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor.Timeline;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class EnemyMove : MonoBehaviour
 {
@@ -16,7 +18,9 @@ public class EnemyMove : MonoBehaviour
     GameObject player; 
     [SerializeField] Transform rayCastLeftTransform;
     [SerializeField] Transform rayCastRightTransform;
-    Vector2 wingedBatVector = new Vector2(3f, 0f); 
+    Vector2 wingedBatVector = new Vector2(3f, 0f);
+    Vector3 batPointA;
+    Vector3 batPointB;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +31,8 @@ public class EnemyMove : MonoBehaviour
         pointA = new Vector3(transform.position.x + 5, transform.position.y, transform.position.z);
         pointB = new Vector3(transform.position.x - 5, transform.position.y, transform.position.z);
         wingedBatVector = new Vector2(3f, rigidbody.velocity.y);
+        batPointA = new Vector3(transform.position.x , transform.position.y + 2, transform.position.z);
+        batPointB = new Vector3(transform.position.x , transform.position.y - 2, transform.position.z);
     }
 
     // Update is called once per frame
@@ -143,11 +149,13 @@ public class EnemyMove : MonoBehaviour
     IEnumerator WingedGoblinMove()
     {
         rigidbody.velocity = wingedBatVector;
-        yield return new WaitForSeconds(1f); 
-        rigidbody.velocity = new Vector2(rigidbody.velocity.x, 1f); 
-        yield return new WaitForSeconds(1f);
-        rigidbody.velocity = new Vector2(rigidbody.velocity.x, -1f);
-        
+        float time = Mathf.PingPong(Time.time * enemyScript.speed, 1f);
+        batPointA.x = (transform.position.x + 0.01f);
+        batPointB.x = (transform.position.x + 0.01f);
+        transform.position = Vector3.Lerp(batPointA, batPointB, time);
+        rigidbody.velocity = wingedBatVector;
+        yield return new WaitForSeconds(0.5f);
+
     }
 
 }
