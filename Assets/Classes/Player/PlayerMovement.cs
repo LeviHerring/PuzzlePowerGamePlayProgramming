@@ -20,9 +20,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform groundCheck;
     public bool hasPutMaskOn;
     Transform mask;
+
+
     public GameObject mapPanel;
     public GameObject bomb;
-    public GameObject Drone; 
+    public GameObject Drone;
+    public GameObject StarPlatinum; 
     // Start is called before the first frame update
     void Start()
     {
@@ -159,6 +162,7 @@ public class PlayerMovement : MonoBehaviour
                 //disguise 
             }
         }
+        
     }
 
     void ItemControls()
@@ -183,6 +187,10 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.M) && powerManagement.itemsUnlocked[1] == true)
         {
             Instantiate(Drone, transform.position, Quaternion.identity);
+        }
+        if (Input.GetKeyDown(KeyCode.B) && powerManagement.itemsUnlocked[4] == true)
+        {
+            Instantiate(StarPlatinum, transform.position, Quaternion.identity);
         }
     }
 
