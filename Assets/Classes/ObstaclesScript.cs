@@ -21,7 +21,7 @@ public class ObstaclesScript : MonoBehaviour
         {
             case 1:
                 StartCoroutine(ObjectMove());
-                break; 
+                break;
         } 
     }
 

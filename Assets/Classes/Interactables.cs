@@ -5,9 +5,10 @@ using UnityEngine;
 public class Interactables : MonoBehaviour
 {
     bool hasBeenInteractedWith;
-    bool isOn;
-    [SerializeField] bool isLeverOn;
-    public InteractableTypes type; 
+    public bool isOn;
+    [SerializeField]public bool isLeverOn;
+    public InteractableTypes type;
+    public GameObject interactButton; 
     public enum InteractableTypes
     {
         Button, 
@@ -44,7 +45,7 @@ public class Interactables : MonoBehaviour
                     }
                     break; 
             }
-            
+            interactButton.SetActive(true); 
         }
         PressurePlate(); 
     }
@@ -62,6 +63,7 @@ public class Interactables : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         hasBeenInteractedWith = false;
+        interactButton.SetActive(false);
     }
 
     IEnumerator Button()

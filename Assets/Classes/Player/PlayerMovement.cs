@@ -175,12 +175,12 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("No Maps");
         }
 
-        if(Input.GetKeyDown(KeyCode.U) && powerManagement.itemsUnlocked[1] == true)
+        if(Input.GetKeyDown(KeyCode.U) && powerManagement.itemsUnlocked[2] == true)
         {
             Instantiate(bomb, transform.position, Quaternion.identity); 
         }
 
-        if(Input.GetKeyDown(KeyCode.M) && powerManagement.itemsUnlocked[2] == true)
+        if(Input.GetKeyDown(KeyCode.M) && powerManagement.itemsUnlocked[1] == true)
         {
             Instantiate(Drone, transform.position, Quaternion.identity);
         }
