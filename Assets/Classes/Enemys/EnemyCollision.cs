@@ -21,7 +21,9 @@ public class EnemyCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(collision.gameObject.GetComponent<Rigidbody2D>().velocity.x, 4f); 
             GetComponentInParent<PARENTENEMY>().health -= GetComponentInParent<PARENTENEMY>().health;
+            
         }
         
     }

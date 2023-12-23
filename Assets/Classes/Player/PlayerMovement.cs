@@ -6,11 +6,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+ //Get component of things
     new Rigidbody2D rigidbody;
     new BoxCollider2D collider; 
     PlayerStats playerStats;
     PowerManagement powerManagement;
-    SpriteRenderer spriteRenderer; 
+    SpriteRenderer spriteRenderer;
+
+    //booleans and things used for movement
      bool isCharged; 
     bool isCharging;
     [SerializeField] bool canDoubleJump;
@@ -20,8 +23,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform groundCheck;
     public bool hasPutMaskOn;
     Transform mask;
+    public bool canMove = true; 
 
-
+    //GameObjects
     public GameObject mapPanel;
     public GameObject bomb;
     public GameObject Drone;
@@ -33,7 +37,8 @@ public class PlayerMovement : MonoBehaviour
         collider = GetComponent<BoxCollider2D>(); 
         playerStats = GetComponent<PlayerStats>(); 
         powerManagement = GetComponent<PowerManagement>(); 
-        spriteRenderer = GetComponent<SpriteRenderer>(); 
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        canMove = true; 
     }
 
     // Update is called once per frame
@@ -53,51 +58,59 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move()
     {
-        if (Input.GetKey(KeyCode.D))
+        if(canMove)
         {
-            rigidbody.velocity = new Vector2(playerStats.speed, rigidbody.velocity.y);
-            isFacingRight = true;
-            Flip(1);
+            if (Input.GetKey(KeyCode.D))
+            {
+                rigidbody.velocity = new Vector2(playerStats.speed, rigidbody.velocity.y);
+                isFacingRight = true;
+                Flip(1);
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                rigidbody.velocity = new Vector2(-playerStats.speed, rigidbody.velocity.y);
+                isFacingRight = false;
+                Flip(-1);
+            }
         }
-        if (Input.GetKey(KeyCode.A))
-        {
-            rigidbody.velocity = new Vector2(-playerStats.speed, rigidbody.velocity.y);
-            isFacingRight = false;
-            Flip(-1); 
-        }
+        
     }
 
     public void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && GroundCheck())
+        if(canMove)
         {
-            if(isCharging == false)
+            if (Input.GetKeyDown(KeyCode.Space) && GroundCheck())
             {
-                rigidbody.velocity = new Vector2(rigidbody.velocity.x, playerStats.jumpHeight);
-                canDoubleJump = true; 
+                if (isCharging == false)
+                {
+                    rigidbody.velocity = new Vector2(rigidbody.velocity.x, playerStats.jumpHeight);
+                    canDoubleJump = true;
+                }
+
+
+
             }
-          
-              
-           
-        }
-        if (Input.GetKeyUp(KeyCode.Space) && rigidbody.velocity.y > 0f)
-        {
-            //Debug.Log("Key is up"); 
-            rigidbody.velocity = new Vector2(rigidbody.velocity.x, rigidbody.velocity.y * 0.5f);
-            isCharged = false;
-            isCharging = false;
+            if (Input.GetKeyUp(KeyCode.Space) && rigidbody.velocity.y > 0f)
+            {
+                //Debug.Log("Key is up"); 
+                rigidbody.velocity = new Vector2(rigidbody.velocity.x, rigidbody.velocity.y * 0.5f);
+                isCharged = false;
+                isCharging = false;
 
-        }
-        if(Input.GetKeyDown(KeyCode.Space) && !GroundCheck() && canDoubleJump)
-        {
-            rigidbody.velocity = new Vector2(rigidbody.velocity.x, playerStats.jumpHeight/2);
-            canDoubleJump = false; 
+            }
+            if (Input.GetKeyDown(KeyCode.Space) && !GroundCheck() && canDoubleJump)
+            {
+                rigidbody.velocity = new Vector2(rigidbody.velocity.x, playerStats.jumpHeight / 2);
+                canDoubleJump = false;
 
+            }
+            if (GroundCheck())
+            {
+                canDoubleJump = true;
+            }
         }
-        if(GroundCheck())
-        {
-            canDoubleJump = true; 
-        }
+       
         
     }
 
@@ -116,24 +129,28 @@ public class PlayerMovement : MonoBehaviour
 
     public void PowerControls()
     {
-        if(Input.GetKeyDown (KeyCode.S) && GroundCheck() && powerManagement.powersUnlocked[1]) 
+        if(canMove)
         {
-            isCharging = true; 
-           
-        }
-        if (Input.GetKeyDown(KeyCode.Space) && isCharging == true)
-        {
-                StartCoroutine(ChargeJump());
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            if (isCharged)
+            if (Input.GetKeyDown(KeyCode.S) && GroundCheck() && powerManagement.powersUnlocked[1])
             {
-                rigidbody.velocity = new Vector2(rigidbody.velocity.x, playerStats.jumpHeight * 1.3f);
-                isCharged = false;
-                isCharging = false;
+                isCharging = true;
+
+            }
+            if (Input.GetKeyDown(KeyCode.Space) && isCharging == true)
+            {
+                StartCoroutine(ChargeJump());
+            }
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                if (isCharged)
+                {
+                    rigidbody.velocity = new Vector2(rigidbody.velocity.x, playerStats.jumpHeight * 1.3f);
+                    isCharged = false;
+                    isCharging = false;
+                }
             }
         }
+        
 
         if(Input.GetKeyDown(KeyCode.F))
         {
@@ -191,6 +208,11 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.B) && powerManagement.itemsUnlocked[4] == true)
         {
             Instantiate(StarPlatinum, transform.position, Quaternion.identity);
+        }
+        if(powerManagement.itemsUnlocked[5] == true)
+        {
+            gameObject.GetComponent<GauntletScript>().enabled = true;
+            powerManagement.itemsUnlocked[5] = false;
         }
     }
 

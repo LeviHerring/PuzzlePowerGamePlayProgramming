@@ -56,6 +56,9 @@ public class EnemyMove : MonoBehaviour
                 break;
             case "wings":
                 StartCoroutine(WingedGoblinMove());
+                break;
+            case "thompus":
+                StartCoroutine(ThwompusMovement()); 
                 break; 
         }
     }
@@ -155,6 +158,61 @@ public class EnemyMove : MonoBehaviour
         transform.position = Vector3.Lerp(batPointA, batPointB, time);
         rigidbody.velocity = wingedBatVector;
         yield return new WaitForSeconds(0.5f);
+
+    }
+
+    IEnumerator ThwompusMovement()
+    {
+        RaycastHit2D rightHit = Physics2D.Raycast(rayCastRightTransform.position, new Vector2(0, -10) * new Vector2(1, 1), 100f);
+        RaycastHit2D leftHit = Physics2D.Raycast(rayCastLeftTransform.position, new Vector2(0, -10) * new Vector2(1, 1), 100f);
+        if (rightHit.collider)
+        {
+            if (rightHit.collider.gameObject.name == "Player")
+            {
+                player = rightHit.collider.gameObject;
+                if (player.gameObject.GetComponent<PlayerMovement>().hasPutMaskOn)
+                {
+                    yield break;
+                }
+                else
+                {
+                    rigidbody.constraints = RigidbodyConstraints2D.None;
+                    rigidbody.constraints = RigidbodyConstraints2D.FreezePositionX;
+                    rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    rigidbody.velocity = new Vector2(rigidbody.velocity.x, -10f);
+                    yield return new WaitForSeconds(3f);
+                    rigidbody.velocity = new Vector2(rigidbody.velocity.x, 10f);
+                    yield return new WaitForSeconds(3f);
+                    rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+                    rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0f);
+
+                }
+            }
+        }
+        if (leftHit.collider)
+        {
+            if (leftHit.collider.gameObject.name == "Player")
+            {
+                player = leftHit.collider.gameObject;
+                if (player.gameObject.GetComponent<PlayerMovement>().hasPutMaskOn)
+                {
+                    yield break;
+                }
+                else
+                {
+                    rigidbody.constraints = RigidbodyConstraints2D.None;
+                    rigidbody.constraints = RigidbodyConstraints2D.FreezePositionX;
+                    rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    rigidbody.velocity = new Vector2(rigidbody.velocity.x, -10f);
+                    yield return new WaitForSeconds(3f);
+                    rigidbody.velocity = new Vector2(rigidbody.velocity.x, 10f);
+                    yield return new WaitForSeconds(3f);
+                    rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+                    rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0f);
+
+                }
+            }
+        }
 
     }
 

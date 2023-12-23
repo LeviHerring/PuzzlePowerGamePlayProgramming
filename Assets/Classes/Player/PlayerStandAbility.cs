@@ -19,7 +19,7 @@ public class PlayerStandAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hit = Physics2D.Raycast(raycastStartPoint.position, new Vector2(2, 0), 2f);
+        hit = Physics2D.Raycast(raycastStartPoint.position, new Vector2(2, 0), 0.5f);
         StartCoroutine(StandPunch()); 
     }
 
@@ -28,7 +28,6 @@ public class PlayerStandAbility : MonoBehaviour
         if(canMove)
         {
             rb.velocity = new Vector2(3f, rb.velocity.y);
-            yield return new WaitForSeconds(2f);
         }
         if(hit.collider == true)
         {
@@ -39,13 +38,11 @@ public class PlayerStandAbility : MonoBehaviour
                 punch.SetActive(true);
                 yield return new WaitForSeconds(1f);
                 punch.SetActive(false);
-                Destroy(gameObject);
+                //Destroy(gameObject);
             }
-        }    
-        if(hit.collider == null)
-        {
-            Destroy(gameObject);
-        }    
+        }
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject); 
         
 
     }    
