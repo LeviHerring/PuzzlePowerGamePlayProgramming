@@ -47,7 +47,11 @@ public class Interactables : MonoBehaviour
             }
             interactButton.SetActive(true); 
         }
-        PressurePlate(); 
+        if(type == InteractableTypes.PressurePlate)
+        {
+            PressurePlate();
+        }
+       
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -63,7 +67,7 @@ public class Interactables : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         hasBeenInteractedWith = false;
-        interactButton.SetActive(false);
+        interactButton.SetActive(false); 
     }
 
     IEnumerator Button()
@@ -80,6 +84,10 @@ public class Interactables : MonoBehaviour
         if(type == InteractableTypes.PressurePlate)
         {
             hasBeenInteractedWith = true; 
+        }
+        else if(type == InteractableTypes.Lever)
+        {
+            isOn = false; 
         }
     }
 

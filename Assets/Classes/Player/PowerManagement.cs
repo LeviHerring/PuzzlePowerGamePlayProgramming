@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PowerManagement : MonoBehaviour
 {
-    ObstaclesScript obstacle; 
+    public ObstaclesScript obstacle; 
     public bool strengthUnlocked;
     public bool[] powersUnlocked = new bool[10]; //Strength = 0, 
     public bool[] itemsUnlocked = new bool[10]; 
-    bool canMove;
+    public bool canMove;
     PlayerStats stats;
     public GameObject mask;
     bool hasInstanstiated;
@@ -22,10 +22,6 @@ public class PowerManagement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(canMove && Input.GetKeyDown(KeyCode.K))
-        {
-            obstacle.coroutineNumber = 1;
-        }
         LevelChecker(); 
 
     }
@@ -60,6 +56,13 @@ public class PowerManagement : MonoBehaviour
                 
 
             }
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Moveable")
+        {
+            obstacle = null; 
         }
     }
 

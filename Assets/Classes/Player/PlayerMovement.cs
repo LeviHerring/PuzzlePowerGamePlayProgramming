@@ -129,7 +129,20 @@ public class PlayerMovement : MonoBehaviour
 
     public void PowerControls()
     {
-        if(canMove)
+        if (powerManagement.canMove && Input.GetKeyDown(KeyCode.K))
+        {
+            if(isFacingRight)
+            {
+                powerManagement.obstacle.strength = 10; 
+            }
+            else
+            {
+                powerManagement.obstacle.strength = -10;
+            }
+            powerManagement.obstacle.coroutineNumber = powerManagement.obstacle.obstacleNumberType;
+        }
+
+        if (canMove)
         {
             if (Input.GetKeyDown(KeyCode.S) && GroundCheck() && powerManagement.powersUnlocked[1])
             {

@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39679b7da4799df4f81e49d7d131db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOn: 0
   isLeverOn: 0
   type: 2
   interactButton: {fileID: 3478905843350442821}
@@ -317,7 +318,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 6.630497, y: 9.650002}
+  m_AnchoredPosition: {x: 1.61, y: 4.81}
   m_SizeDelta: {x: 1.7655, y: 1.3335}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7617254831191399519
