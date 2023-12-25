@@ -25,6 +25,16 @@ public class RopeObstacle : MonoBehaviour
         {
             rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         }
+
+        if(interactable.isOn == true)
+        {
+            rb.constraints = RigidbodyConstraints2D.None;
+            StartCoroutine(Gravity());
+        }
+        else
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+        }
     }
 
     IEnumerator Gravity()

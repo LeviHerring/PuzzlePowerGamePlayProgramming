@@ -23,13 +23,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform groundCheck;
     public bool hasPutMaskOn;
     Transform mask;
-    public bool canMove = true; 
+    public bool canMove = true;
+    public Transform firePoint;  
 
     //GameObjects
     public GameObject mapPanel;
     public GameObject bomb;
     public GameObject Drone;
-    public GameObject StarPlatinum; 
+    public GameObject StarPlatinum;
+    public GameObject bullet; 
     // Start is called before the first frame update
     void Start()
     {
@@ -63,14 +65,20 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.D))
             {
                 rigidbody.velocity = new Vector2(playerStats.speed, rigidbody.velocity.y);
-                isFacingRight = true;
-                Flip(1);
+                if(!isFacingRight)
+                {
+                    Flip();
+                }
+                
             }
             if (Input.GetKey(KeyCode.A))
             {
                 rigidbody.velocity = new Vector2(-playerStats.speed, rigidbody.velocity.y);
-                isFacingRight = false;
-                Flip(-1);
+                if(isFacingRight)
+                {
+                    Flip();
+                }
+                
             }
         }
         
@@ -114,16 +122,10 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    void Flip(float flipValue)
+    void Flip()
     {
-        if (isFacingRight)
-        {
-            transform.localScale = new Vector3(1, 1, 1);
-        }
-        else
-        {
-            transform.localScale = new Vector3(flipValue, 1, 1);
-        }
+        isFacingRight = !isFacingRight;
+        transform.Rotate(0f, 180f, 0f); 
         
     }
 
@@ -217,6 +219,10 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.M) && powerManagement.itemsUnlocked[1] == true)
         {
             Instantiate(Drone, transform.position, Quaternion.identity);
+        }
+        if (Input.GetKeyDown(KeyCode.Period) && powerManagement.itemsUnlocked[3] == true)
+        {
+            Instantiate(bullet, firePoint.position, firePoint.rotation);
         }
         if (Input.GetKeyDown(KeyCode.B) && powerManagement.itemsUnlocked[4] == true)
         {
