@@ -80,8 +80,7 @@ public class Interactables : MonoBehaviour
         isOn = true;
         if (isHacked == true)
         {
-            yield return new WaitForSeconds(10);
-            Debug.Log(10); 
+            yield return new WaitForSeconds(15);
         }
         else
         {
@@ -97,7 +96,15 @@ public class Interactables : MonoBehaviour
     {
         if(type == InteractableTypes.PressurePlate)
         {
-            hasBeenInteractedWith = true; 
+            if(collision.gameObject.name.ToLower() == "hackhitbox")
+            {
+                
+            }
+            else
+            {
+                hasBeenInteractedWith = true;
+            }
+           
         }
         else if(type == InteractableTypes.Lever)
         {
@@ -125,11 +132,11 @@ public class Interactables : MonoBehaviour
 
     void PressurePlate()
     {
-        if(hasBeenInteractedWith == true)
+        if (hasBeenInteractedWith == true)
         {
             isOn = true;
         }
-        else
+        else if (hasBeenInteractedWith == false && isHacked == false)
         {
             isOn = false;
         }
