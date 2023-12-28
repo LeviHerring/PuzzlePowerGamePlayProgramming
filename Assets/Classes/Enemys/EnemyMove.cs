@@ -11,6 +11,7 @@ public class EnemyMove : MonoBehaviour
     new Rigidbody2D rigidbody;
     new Collider2D collider;
     bool move = true;
+    bool isFacingRight = true; 
     Vector3 pointA;
     Vector3 pointB;
     RaycastHit2D hit;
@@ -21,6 +22,8 @@ public class EnemyMove : MonoBehaviour
     Vector2 wingedBatVector = new Vector2(3f, 0f);
     Vector3 batPointA;
     Vector3 batPointB;
+    public GameObject punchHitbox;
+    [SerializeField] Vector3 raycastLength; 
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +36,7 @@ public class EnemyMove : MonoBehaviour
         wingedBatVector = new Vector2(3f, rigidbody.velocity.y);
         batPointA = new Vector3(transform.position.x , transform.position.y + 2, transform.position.z);
         batPointB = new Vector3(transform.position.x , transform.position.y - 2, transform.position.z);
+        
     }
 
     // Update is called once per frame
@@ -59,6 +63,12 @@ public class EnemyMove : MonoBehaviour
                 break;
             case "thompus":
                 StartCoroutine(ThwompusMovement()); 
+                break;
+            case "staticpuncher":
+                StartCoroutine(Punch());
+                break;
+            case "chasepuncher":
+                ChaserPuncher();
                 break; 
         }
     }
@@ -215,5 +225,85 @@ public class EnemyMove : MonoBehaviour
         }
 
     }
+
+
+    IEnumerator Punch()
+    {
+        if(IsPlayerNear())
+        {
+            if(!isFacingRight)
+            {
+                Flip(); 
+            }
+            yield return new WaitForSeconds(0.3f);
+            punchHitbox.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            punchHitbox.SetActive(false);
+            StartCoroutine(Cooldown(1)); 
+        }
+
+    }
+
+     bool IsPlayerNear()
+    {
+        LayerMask mask = LayerMask.GetMask("Player");
+        return Physics2D.OverlapCircle(rayCastRightTransform.position, 1f, mask);
+    }
+
+
+
+    IEnumerator Cooldown(int cooldownTown)
+    {
+        yield return new WaitForSeconds(cooldownTown); 
+    }
+
+
+    void ChaserPuncher()
+    {
+        RaycastHit2D rightHit = Physics2D.Raycast(rayCastRightTransform.position, raycastLength * new Vector2(1, 1), 5f);
+        if (rightHit.collider)
+        {
+            if (rightHit.collider.gameObject.name == "Player")
+            {
+                player = rightHit.collider.gameObject;
+                Debug.Log(player.transform.position.x - transform.position.x);
+                if (player.transform.position.x < transform.position.x)
+                {
+                    Debug.Log("Left");
+                    //rigidbody.velocity = new Vector2(-5, rigidbody.velocity.y);
+                }
+                else if (player.transform.position.x > transform.position.x)
+                {
+                    //rigidbody.velocity = new Vector2(5, rigidbody.velocity.y);
+                }
+                if(player.transform.position.x - transform.position.x < 4)
+                {
+                    Debug.Log("It is less!"); 
+                    Debug.Log(player.transform.position.x - transform.position.x); 
+                    StartCoroutine(ChaserPunch());
+                    //rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
+                    
+                }
+            }
+        }
+    }
+
+    IEnumerator ChaserPunch()
+    {
+            yield return new WaitForSeconds(0.3f);
+            punchHitbox.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            punchHitbox.SetActive(false);
+            StartCoroutine(Cooldown(1));
+    }
+
+
+    void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        transform.Rotate(0f, 180f, 0f);
+    }
+
+
 
 }

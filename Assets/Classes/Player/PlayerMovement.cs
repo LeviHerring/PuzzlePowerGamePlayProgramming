@@ -24,14 +24,16 @@ public class PlayerMovement : MonoBehaviour
     public bool hasPutMaskOn;
     Transform mask;
     public bool canMove = true;
-    public Transform firePoint;  
+    public Transform firePoint;
+    bool hasHacked = false; 
 
     //GameObjects
     public GameObject mapPanel;
     public GameObject bomb;
     public GameObject Drone;
     public GameObject StarPlatinum;
-    public GameObject bullet; 
+    public GameObject bullet;
+    public GameObject hackHitbox; 
     // Start is called before the first frame update
     void Start()
     {
@@ -171,8 +173,15 @@ public class PlayerMovement : MonoBehaviour
         {
             if (powerManagement.powersUnlocked[2])
             {
-
-                StartCoroutine(PhaseCoroutine()); 
+                if(isFacingRight == true)
+                {
+                    StartCoroutine(PhaseCoroutine(5));
+                }
+                if(isFacingRight == false)
+                {
+                    StartCoroutine(PhaseCoroutine(5));
+                }
+                
             }
         }
 
@@ -192,6 +201,16 @@ public class PlayerMovement : MonoBehaviour
                     hasPutMaskOn = false; 
                 }
                 //disguise 
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            if(powerManagement.powersUnlocked[5])
+            {
+                StartCoroutine(Hacking()); 
+                
+               
             }
         }
         
@@ -243,24 +262,27 @@ public class PlayerMovement : MonoBehaviour
             isCharged = true; 
     }
 
-    IEnumerator PhaseCoroutine()
+    IEnumerator PhaseCoroutine(int moveAmount)
     {
+        Debug.Log(moveAmount); 
         rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
         spriteRenderer.enabled = false;
         collider.enabled = false;
         yield return new WaitForSeconds(1f);
-        if (isFacingRight)
-        {
-            transform.Translate(5, 0, 0);
-        }
-        else
-        {
-            transform.Translate(-5, 0, 0);
-        }
+        transform.Translate(moveAmount, 0, 0);
+        
+
        
         rigidbody.constraints = RigidbodyConstraints2D.None;
         rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation; 
         spriteRenderer.enabled = true;
         collider.enabled = true;
+    }
+
+    IEnumerator Hacking()
+    {
+        hackHitbox.SetActive(true);
+        yield return new WaitForSeconds(0.6f);
+        hackHitbox.SetActive(false);
     }
 }

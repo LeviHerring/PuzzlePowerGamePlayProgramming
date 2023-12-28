@@ -7,8 +7,12 @@ public class Interactables : MonoBehaviour
     bool hasBeenInteractedWith;
     public bool isOn;
     [SerializeField]public bool isLeverOn;
+    bool isHacked;
+    [SerializeField] bool isPossibleToHack; 
+
     public InteractableTypes type;
-    public GameObject interactButton; 
+    public GameObject interactButton;
+    
     public enum InteractableTypes
     {
         Button, 
@@ -74,7 +78,17 @@ public class Interactables : MonoBehaviour
     {
         Debug.Log("On");
         isOn = true;
-        yield return new WaitForSeconds(2);
+        if (isHacked == true)
+        {
+            yield return new WaitForSeconds(10);
+            Debug.Log(10); 
+        }
+        else
+        {
+            yield return new WaitForSeconds(2);
+            Debug.Log(2); 
+        }
+        
         isOn = false;
         Debug.Log("Off"); 
     }
@@ -89,6 +103,24 @@ public class Interactables : MonoBehaviour
         {
             isOn = false; 
         }
+
+        if(collision.gameObject.name.ToLower() == "hackhitbox")
+        {
+            if(isHacked == false)
+            {
+                if(isPossibleToHack == true)
+                {
+                    Debug.Log("Hacked"); 
+                    isHacked = true;
+                }
+                return; 
+            }
+            if(isHacked == true)
+            {
+                isHacked = false; 
+            }
+        }
+
     }
 
     void PressurePlate()
@@ -116,6 +148,10 @@ public class Interactables : MonoBehaviour
         }
     }
 
+    void Hacked()
+    {
+
+    }
 
 
     
