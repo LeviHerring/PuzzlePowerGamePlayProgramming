@@ -257,7 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rayCastLeftTransform: {fileID: 0}
   rayCastRightTransform: {fileID: 8409877574647258333}
-  punchHitbox: {fileID: 0}
+  punchHitbox: {fileID: 9094404934439117415}
   raycastLength: {x: 10, y: 0, z: 0}
 --- !u!1 &9094404934439117415
 GameObject:

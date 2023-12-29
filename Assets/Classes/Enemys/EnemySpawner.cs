@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] GameObject[] enemies;
+    public GameObject[] enemies;
     public int spawnerLevel;
-    bool canSpawn = true; 
+    public bool canSpawn = true;
+    public int time = 30; 
     // Start is called before the first frame update
     void Start()
     {
@@ -15,25 +16,27 @@ public class EnemySpawner : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         StartCoroutine(SpawnerCoroutine());
     }
 
-    IEnumerator SpawnerCoroutine()
+    public IEnumerator SpawnerCoroutine()
     {
-        switch (spawnerLevel)
+        if(canSpawn == true)
         {
-            case 0:
-                SpawnFunction(); 
-                break;
-        }
+            switch (spawnerLevel)
+            {
+                case 0:
+                    SpawnFunction();
+                    break;
+            }
 
-        yield return new WaitForSeconds(30);
-        canSpawn = true;
+        }
+        yield return new WaitForSeconds(1); 
     }
 
-    void SpawnFunction()
+    public void SpawnFunction()
     {
         if(canSpawn)
         {
@@ -41,7 +44,15 @@ public class EnemySpawner : MonoBehaviour
             {
                 Instantiate(enemies[spawnerLevel], transform.position, Quaternion.identity);
             }
-            canSpawn = false; 
+            canSpawn = false;
+            StartCoroutine(Cooldown(time)); 
+
         }
+    }
+
+    public IEnumerator Cooldown(int time)
+    {
+        yield return new WaitForSeconds(time);
+        canSpawn = true; 
     }
 }
