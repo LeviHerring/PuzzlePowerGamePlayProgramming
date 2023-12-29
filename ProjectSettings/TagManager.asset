@@ -9,6 +9,9 @@ TagManager:
   - Moveable
   - Hitbox
   - Weapon
+  - EnemyHitbox
+  - Test
+  - Vulnerable
   layers:
   - Default
   - TransparentFX

@@ -22,10 +22,20 @@ public class Hitboxes : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Enemy"))
+
+        switch (collision.gameObject.tag.ToLower())
         {
-            Debug.Log("Collided"); 
-            collision.gameObject.GetComponent<PARENTENEMY>().health -= damage; 
+            case "enemy":
+                Debug.Log("Collided");
+                collision.gameObject.GetComponent<PARENTENEMY>().health -= damage;
+                break;
+            case "vulnerable":
+                Debug.Log("Collided with vulnerable"); 
+                //collision.gameObject.GetComponentInParent<PARENTENEMY>().health -= damage;
+                break;
+            case "test":
+                Debug.Log("Test");
+                break; 
         }
     }
 

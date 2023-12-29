@@ -63,20 +63,20 @@ public class BreakableSpawner : EnemySpawner
         {
             case 0:
                 time = 30; 
-                Debug.Log("Hacked 0 times");
+              
                 break;
             case 1:
                 time = 60;
-                Debug.Log("Hacked 1 time");
+            
                 break;
             case 2:
                 time = 30; 
                 spawnerLevel++;
-                Debug.Log("Hacked 2 times");
+              
                 break;
             case 3:
                 time = 15;
-                Debug.Log("Hacked 3 times");
+              
                 break;
         }
     }

@@ -25,6 +25,7 @@ public class EnemyCollision : MonoBehaviour
             GetComponentInParent<PARENTENEMY>().health -= GetComponentInParent<PARENTENEMY>().health;
             
         }
+
         
     }
 }

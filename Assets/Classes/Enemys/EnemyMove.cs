@@ -191,10 +191,11 @@ public class EnemyMove : MonoBehaviour
                     rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
                     rigidbody.velocity = new Vector2(rigidbody.velocity.x, -10f);
                     yield return new WaitForSeconds(3f);
-                    rigidbody.velocity = new Vector2(rigidbody.velocity.x, 10f);
+                    rigidbody.velocity = new Vector2(rigidbody.velocity.x, 6f);
                     yield return new WaitForSeconds(3f);
-                    rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
                     rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0f);
+                    rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+                    
 
                 }
             }
@@ -217,8 +218,9 @@ public class EnemyMove : MonoBehaviour
                     yield return new WaitForSeconds(3f);
                     rigidbody.velocity = new Vector2(rigidbody.velocity.x, 10f);
                     yield return new WaitForSeconds(3f);
-                    rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
                     rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0f);
+                    rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+                    
 
                 }
             }
