@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
+
     bool isOn;
     public Interactables connectedInteractable;
     Collider2D doorCollider; 

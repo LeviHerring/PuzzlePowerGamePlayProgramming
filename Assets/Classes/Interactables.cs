@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI; 
 
 public class Interactables : MonoBehaviour
 {
@@ -12,12 +14,19 @@ public class Interactables : MonoBehaviour
 
     public InteractableTypes type;
     public GameObject interactButton;
-    
+
+    public GameObject SignCanvas;
+    public string signName;
+    public TextMeshProUGUI nameText;
+    public string description;
+    public TextMeshProUGUI descriptionText; 
     public enum InteractableTypes
     {
         Button, 
         Lever,
-        PressurePlate
+        PressurePlate,
+        Sign,
+        NewArea
     } 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +56,16 @@ public class Interactables : MonoBehaviour
                     {
                         Lever();
                     }
-                    break; 
+                    break;
+                case InteractableTypes.Sign:
+                    if(Input.GetKeyDown(KeyCode.I))
+                    {
+                        Sign(); 
+                    }
+                    break;
+                case InteractableTypes.NewArea:
+                    StartCoroutine(NewArea());
+                    break;
             }
             interactButton.SetActive(true); 
         }
@@ -160,6 +178,32 @@ public class Interactables : MonoBehaviour
 
     }
 
+    void Sign()
+    {
+        if (!isOn)
+        {
+            isOn = true;
+            nameText.text = signName;
+            descriptionText.text = description; 
+            SignCanvas.SetActive(true);
+            Time.timeScale = 0; 
 
+        }
+        else
+        {
+            SignCanvas.SetActive(false);
+            Time.timeScale = 1;
+            isOn = false;
+        }
+    }
+
+    IEnumerator NewArea()
+    {
+        SignCanvas.SetActive(true);
+        nameText.text = signName;      
+        descriptionText.text = description;
+        yield return new WaitForSeconds(4f);
+        SignCanvas.SetActive(false); 
+    }
     
 }

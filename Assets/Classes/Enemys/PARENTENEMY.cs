@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PARENTENEMY : MonoBehaviour
 {
+    public bool hasBeenChecked; 
+    public bool isDead; 
     public int health;
     public string enemyName;
     public int damageDealt;
@@ -36,6 +38,7 @@ public class PARENTENEMY : MonoBehaviour
                 Instantiate(xp, randomPos, Quaternion.identity); 
             }
         }
+        isDead = true; 
         gameObject.SetActive(false);
     }
 

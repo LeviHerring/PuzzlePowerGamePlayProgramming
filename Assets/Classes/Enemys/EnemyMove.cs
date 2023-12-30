@@ -156,11 +156,40 @@ public class EnemyMove : MonoBehaviour
 
     public void GremlinMove()
     {
-        rigidbody.velocity = new Vector2(-2, rigidbody.velocity.y); 
+        rigidbody.velocity = new Vector2(enemyScript.speed, rigidbody.velocity.y);
+        RaycastHit2D rightHit = Physics2D.Raycast(rayCastRightTransform.position, raycastLength * new Vector2(1, 1), 5f);
+        if (rightHit)
+        {
+            if (rightHit.collider.tag == "Player")
+            {
+
+            }
+            else
+            {
+                raycastLength *= -1;
+                transform.Rotate(0f, 180f, 0f);
+                enemyScript.speed *= -1; 
+            }
+        }
+
     }
 
     IEnumerator WingedGoblinMove()
     {
+        RaycastHit2D rightHit = Physics2D.Raycast(rayCastRightTransform.position, raycastLength * new Vector2(1, 1), 5f);
+        if(rightHit)
+        {
+            if(rightHit.collider.tag == "Player")
+            {
+                 
+            }
+            else
+            {
+                raycastLength *= -1;
+                wingedBatVector *= -1;
+                transform.Rotate(0f, 180f, 0f);
+            }
+        }
         rigidbody.velocity = wingedBatVector;
         float time = Mathf.PingPong(Time.time * enemyScript.speed, 1f);
         batPointA.x = (transform.position.x + 0.01f);
