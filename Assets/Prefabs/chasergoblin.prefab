@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 7441897957558829967}
   - component: {fileID: 4290512432858276605}
   m_Layer: 0
-  m_Name: TestGoblin
+  m_Name: chasergoblin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,8 +133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5748e065e26da6a4ebea5851efa4a1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasBeenChecked: 0
+  isDead: 0
   health: 10
-  enemyName: ChaseGoblin
+  enemyName: chasergoblin
   damageDealt: 1
   speed: 0.5
   xpValue: 2
@@ -223,8 +225,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc935fe297c47f4d94f853223620f04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayCastLeftTransform: {fileID: 0}
-  rayCastRightTransform: {fileID: 0}
+  rayCastLeftTransform: {fileID: 4288217766212209829}
+  rayCastRightTransform: {fileID: 4087401236522277093}
+  punchHitbox: {fileID: 0}
+  raycastLength: {x: 0, y: 0, z: 0}
 --- !u!1 &7088790282353467774
 GameObject:
   m_ObjectHideFlags: 0

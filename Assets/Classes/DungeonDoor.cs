@@ -6,7 +6,7 @@ public class DungeonDoor : MonoBehaviour
 {
     public GameObject[] enemies;
     public int amountDead;
-    bool isActivated;
+    public bool isActivated;
     Collider2D collider;
     public Transform raycastTransform; 
 

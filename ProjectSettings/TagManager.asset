@@ -12,6 +12,7 @@ TagManager:
   - EnemyHitbox
   - Test
   - Vulnerable
+  - CanTeleportThrough
   layers:
   - Default
   - TransparentFX

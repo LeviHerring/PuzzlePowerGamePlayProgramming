@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     //booleans and things used for movement
      bool isCharged; 
     bool isCharging;
+    bool canUseSpecial = true; 
     [SerializeField] bool canDoubleJump;
     [SerializeField] bool isFacingRight;
     public bool isDisguised; 
@@ -137,13 +138,16 @@ public class PlayerMovement : MonoBehaviour
         {
             if(isFacingRight)
             {
-                powerManagement.obstacle.strength = 10; 
+                powerManagement.obstacle.strength = 10;
+                
             }
             else
             {
                 powerManagement.obstacle.strength = -10;
+                
             }
             powerManagement.obstacle.coroutineNumber = powerManagement.obstacle.obstacleNumberType;
+
         }
 
         if (canMove)
@@ -171,7 +175,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.F))
         {
-            if (powerManagement.powersUnlocked[2])
+            if (powerManagement.powersUnlocked[2] && canUseSpecial == true)
             {
                 if(isFacingRight == true)
                 {
@@ -230,22 +234,25 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("No Maps");
         }
 
-        if(Input.GetKeyDown(KeyCode.U) && powerManagement.itemsUnlocked[2] == true)
+        if(Input.GetKeyDown(KeyCode.U) && powerManagement.itemsUnlocked[2] == true && canUseSpecial == true)
         {
-            Instantiate(bomb, transform.position, Quaternion.identity); 
+            Instantiate(bomb, transform.position, Quaternion.identity);
+            StartCoroutine(Cooldown()); 
         }
 
-        if(Input.GetKeyDown(KeyCode.M) && powerManagement.itemsUnlocked[1] == true)
+        if(Input.GetKeyDown(KeyCode.M) && powerManagement.itemsUnlocked[1] == true && canUseSpecial == true )
         {
             Instantiate(Drone, transform.position, Quaternion.identity);
+            StartCoroutine(Cooldown());
         }
         if (Input.GetKeyDown(KeyCode.Period) && powerManagement.itemsUnlocked[3] == true)
         {
             Instantiate(bullet, firePoint.position, firePoint.rotation);
         }
-        if (Input.GetKeyDown(KeyCode.B) && powerManagement.itemsUnlocked[4] == true)
+        if (Input.GetKeyDown(KeyCode.B) && powerManagement.itemsUnlocked[4] == true && canUseSpecial == true)
         {
             Instantiate(StarPlatinum, transform.position, Quaternion.identity);
+            StartCoroutine(Cooldown());
         }
         if(powerManagement.itemsUnlocked[5] == true)
         {
@@ -264,19 +271,33 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator PhaseCoroutine(int moveAmount)
     {
-        Debug.Log(moveAmount); 
-        rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-        spriteRenderer.enabled = false;
-        collider.enabled = false;
-        yield return new WaitForSeconds(1f);
-        transform.Translate(moveAmount, 0, 0);
-        
+        Debug.Log(moveAmount);
+        canUseSpecial = false; 
+        RaycastHit2D raycastHit = Physics2D.Raycast(firePoint.position, 10f * new Vector2(1, 1), 5f);
+        if (raycastHit)
+        {
+            if (raycastHit.collider.tag.ToLower() == "canteleportthrough")
+            {
+                rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+                spriteRenderer.enabled = false;
+                collider.enabled = false;
+                yield return new WaitForSeconds(1f);
+                transform.Translate(moveAmount, 0, 0);
 
+
+
+                rigidbody.constraints = RigidbodyConstraints2D.None;
+                rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+                spriteRenderer.enabled = true;
+                collider.enabled = true;
+            }
+        }
+        else
+        {
+           
+        }
+        StartCoroutine(Cooldown()); 
        
-        rigidbody.constraints = RigidbodyConstraints2D.None;
-        rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation; 
-        spriteRenderer.enabled = true;
-        collider.enabled = true;
     }
 
     IEnumerator Hacking()
@@ -284,5 +305,12 @@ public class PlayerMovement : MonoBehaviour
         hackHitbox.SetActive(true);
         yield return new WaitForSeconds(0.6f);
         hackHitbox.SetActive(false);
+    }
+
+    IEnumerator Cooldown()
+    {
+        canUseSpecial = false; 
+        yield return new WaitForSeconds(2f);
+        canUseSpecial = true; 
     }
 }

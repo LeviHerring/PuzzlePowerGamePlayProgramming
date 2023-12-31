@@ -7,6 +7,7 @@ public class BreakableSpawner : EnemySpawner
     bool isHacked;
     [SerializeField] int timesHacked;
     public int health;
+    [SerializeField] int originalTime; 
 
 
     new void Update()
@@ -62,20 +63,20 @@ public class BreakableSpawner : EnemySpawner
         switch (timesHacked)
         {
             case 0:
-                time = 30; 
+                time = originalTime; 
               
                 break;
             case 1:
-                time = 60;
+                time = time*2;
             
                 break;
             case 2:
-                time = 30; 
+                time = originalTime; 
                 spawnerLevel++;
               
                 break;
             case 3:
-                time = 15;
+                time /= 2;
               
                 break;
         }
