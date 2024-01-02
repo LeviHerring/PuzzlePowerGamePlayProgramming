@@ -13,6 +13,7 @@ TagManager:
   - Test
   - Vulnerable
   - CanTeleportThrough
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX

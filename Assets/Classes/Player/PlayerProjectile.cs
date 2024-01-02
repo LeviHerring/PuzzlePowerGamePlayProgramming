@@ -28,10 +28,22 @@ public class PlayerProjectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag.ToLower() == "enemy")
+        if (gameObject.tag.ToLower() == "enemybullet")
         {
-            collision.gameObject.GetComponent<PARENTENEMY>().health -= 5;
-            Destroy(gameObject);
+            if (collision.gameObject.tag.ToLower() == "player")
+            {
+                collision.gameObject.GetComponent<PlayerStats>().currentHealth -= 2;
+                Destroy(gameObject);
+            }
         }
+        else if(gameObject.tag == null)
+        {
+            if (collision.gameObject.tag.ToLower() == "enemy")
+            {
+                collision.gameObject.GetComponent<PARENTENEMY>().health -= 5;
+                Destroy(gameObject);
+            }
+        }
+       
     }
 }

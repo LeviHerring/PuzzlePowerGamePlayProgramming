@@ -7,18 +7,27 @@ public class EnemyShoot : MonoBehaviour
     bool canShoot = true; 
     public GameObject bullet;
     public Transform bulletSpawnPos;
-    ShootingType shootingType; 
+    public ShootingType shootingType; 
     // Start is called before the first frame update
 
 
     public enum ShootingType
     {
-
+        Static, 
+        MachineGun,
     }
     void Start()
     {
-
-        StartCoroutine(Shoot());
+        switch (shootingType)
+        {
+            case ShootingType.Static:
+                StartCoroutine(Shoot());
+                break;
+            case ShootingType.MachineGun:
+                StartCoroutine(ShootMachineGun());
+                break; 
+        }
+       
     }
 
     // Update is called once per frame
@@ -39,5 +48,16 @@ public class EnemyShoot : MonoBehaviour
              
         }
     
+    }
+
+    IEnumerator ShootMachineGun()
+    {
+       for (int i = 0; i < 15; i++)
+        {
+            Instantiate(bullet, bulletSpawnPos.position, bulletSpawnPos.rotation);
+            yield return new WaitForSeconds(0.2f);
+        }
+        yield return new WaitForSeconds(7f); 
+
     }
 }

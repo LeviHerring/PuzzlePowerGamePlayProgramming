@@ -16,17 +16,8 @@ public class RopeObstacle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(interactable.isLeverOn == true)
-        {
-            rb.constraints = RigidbodyConstraints2D.None;
-            StartCoroutine(Gravity()); 
-        }
-        else
-        {
-            rb.constraints = RigidbodyConstraints2D.FreezePositionY;
-        }
 
-        if(interactable.isOn == true)
+        if(interactable.isOn == true || interactable.isLeverOn == true)
         {
             rb.constraints = RigidbodyConstraints2D.None;
             StartCoroutine(Gravity());

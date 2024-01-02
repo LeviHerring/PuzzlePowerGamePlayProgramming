@@ -11,8 +11,8 @@ public class PlayerStats : MonoBehaviour
     public int xpAmount;
     public int xpLevel;
     public int maxXp;
-    public bool hasWeapon; 
-
+    public bool hasWeapon;
+    public Transform checkpoint; 
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,8 @@ public class PlayerStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Experience(); 
+        Experience();
+        Death(); 
     }
 
 
@@ -37,5 +38,31 @@ public class PlayerStats : MonoBehaviour
             maxXp += 5; 
 
         }
+    }
+
+    void Death()
+    {
+        if(currentHealth <= 0)
+        {
+            StartCoroutine(DeathCoroutine()); 
+        }
+    }
+
+    IEnumerator DeathCoroutine()
+    {
+        bool hasRespawned = false;
+        currentHealth = maxHealth;
+        GetComponent<PlayerMovement>().canMove = false;
+        yield return new WaitForSeconds(1f);
+        if(hasRespawned == false)
+        {
+            GetComponent<PlayerMovement>().canMove = true;
+           
+            transform.position = checkpoint.position;
+           
+        }
+        
+       
+
     }
 }
