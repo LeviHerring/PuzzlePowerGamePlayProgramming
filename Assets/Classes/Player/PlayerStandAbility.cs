@@ -8,11 +8,21 @@ public class PlayerStandAbility : MonoBehaviour
     public GameObject punch;
     RaycastHit2D hit;
     public Transform raycastStartPoint;
-    bool canMove = true; 
+    bool canMove = true;
+    float speed = 3f;
+    public Quaternion test; 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        if(transform.rotation == test)
+        {
+            speed = -3f; 
+        }
+        else
+        {
+            speed = 3f; 
+        }
         canMove = true; 
     }
 
@@ -27,7 +37,7 @@ public class PlayerStandAbility : MonoBehaviour
     {
         if(canMove)
         {
-            rb.velocity = new Vector2(3f, rb.velocity.y);
+            rb.velocity = new Vector2(speed, rb.velocity.y);
         }
         if(hit.collider == true)
         {

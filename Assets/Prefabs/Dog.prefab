@@ -120,8 +120,8 @@ Transform:
   m_GameObject: {fileID: 2744809991981378229}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.70283616, w: 0.7113519}
-  m_LocalPosition: {x: 5.74, y: -4.0173, z: 0}
-  m_LocalScale: {x: 0.45581815, y: 1.9537, z: 1}
+  m_LocalPosition: {x: 4.4231, y: -4.0014, z: 0}
+  m_LocalScale: {x: 0.45581815, y: 0.63671076, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2174241123052942122}
@@ -212,7 +212,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.06287488}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -223,7 +223,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1, y: 1.4486864}
   m_EdgeRadius: 0
 --- !u!50 &1772163944672508193
 Rigidbody2D:
@@ -251,7 +251,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &8068509689510195247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +272,7 @@ MonoBehaviour:
   canvas: {fileID: 0}
   imageObject: {fileID: 0}
   metre: {fileID: 0}
-  height: 0.5
+  height: 5
   speed: 3
   timeLeftAlive: 10
   groundCheck: {fileID: 2174241123052942122}

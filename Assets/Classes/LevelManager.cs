@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public GameObject playerObject; 
     PlayerStats player;
     PARENTENEMY[] enemies;
     [SerializeField] int levelMilestone;
@@ -19,21 +20,37 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
       levelMilestone = player.xpLevel; 
-      switch (levelMilestone)
+        if(hasRun == false)
         {
-            case 5:
-                LevelUp(); 
-                break;
-            case 6:
-                hasRun = false;
-                break;
-            case 10:
-                LevelUp();
-                break;
-            case 11:
-                hasRun = true;
-                break; 
+            switch (levelMilestone)
+            {
+                case 5:
+                    LevelUp();
+                    break;
+                //case 6:
+                //    hasRun = false;
+                //    break;
+                case 10:
+                    LevelUp();
+                    break;
+                case 11:
+                    hasRun = true;
+                    break;
+            }
+           switch(player.itemsUnlocked)
+            {
+                case 1:
+                    LevelUp();
+                    break;
+                case 2:
+                    LevelUp();
+                    break;
+                case 3:
+                    LevelUp();
+                    break; 
+            }
         }
+    
 
 
       

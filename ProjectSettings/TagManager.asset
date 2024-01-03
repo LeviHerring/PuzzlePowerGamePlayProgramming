@@ -14,6 +14,9 @@ TagManager:
   - Vulnerable
   - CanTeleportThrough
   - EnemyBullet
+  - Ladder
+  - Invulnerable
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX

@@ -146,6 +146,14 @@ public class Interactables : MonoBehaviour
             }
         }
 
+        if(collision.gameObject.tag.ToLower() == "playerbullet")
+        {
+            if(type == InteractableTypes.Lever)
+            {
+                Lever(); 
+            }
+        }
+
     }
 
     void PressurePlate()

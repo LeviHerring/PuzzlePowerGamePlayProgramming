@@ -67,7 +67,7 @@ public class DogItem : DroneAndDogParent
         }
     }
 
-    IEnumerator cooldown()
+    IEnumerator Cooldown()
     {
         canAttack = false;
         yield return new WaitForSeconds(1);
@@ -80,7 +80,7 @@ public class DogItem : DroneAndDogParent
         hitbox.SetActive(true);
         yield return new WaitForSeconds(1);
         hitbox.SetActive(false);
-        StartCoroutine(cooldown());
+        StartCoroutine(Cooldown());
     }
 
     void Flip(float flipValue)

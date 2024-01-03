@@ -12,7 +12,8 @@ public class PlayerStats : MonoBehaviour
     public int xpLevel;
     public int maxXp;
     public bool hasWeapon;
-    public Transform checkpoint; 
+    public Transform checkpoint;
+    public int itemsUnlocked; 
 
     // Start is called before the first frame update
     void Start()

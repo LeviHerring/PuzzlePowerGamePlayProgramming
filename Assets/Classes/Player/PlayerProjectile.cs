@@ -36,7 +36,7 @@ public class PlayerProjectile : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        else if(gameObject.tag == null)
+        else if(gameObject.tag.ToLower() == "playerbullet")
         {
             if (collision.gameObject.tag.ToLower() == "enemy")
             {

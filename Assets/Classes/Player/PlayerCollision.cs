@@ -43,6 +43,28 @@ public class PlayerCollision : MonoBehaviour
                 break; 
 
         }
+
+        switch(collision.gameObject.name.ToLower())
+        {
+            case "spiker":
+                playerStats.currentHealth -= playerStats.currentHealth;
+                break; 
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        switch(collision.gameObject.tag.ToLower())
+        {
+            case "ladder":
+                GetComponent<PlayerMovement>().IsOnLadder = true;
+                break;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        GetComponent<PlayerMovement>().IsOnLadder = false;
     }
 
     void DamageCheck()

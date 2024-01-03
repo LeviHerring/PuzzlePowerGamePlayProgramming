@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8048967861743466927}
   - component: {fileID: 454618563181667072}
-  - component: {fileID: 6633938715832625777}
+  - component: {fileID: 5596184854910066501}
   m_Layer: 0
   m_Name: StandPunch
   m_TagString: Untagged
@@ -78,7 +78,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.0145721, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6633938715832625777
+--- !u!114 &5596184854910066501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,10 +87,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4627211171531419773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc8845df4876fce4e8592d7fbe90565c, type: 3}
+  m_Script: {fileID: 11500000, guid: 300b2b5609503614c94ed1b8e0facbe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 10
 --- !u!1 &6184330973286982680
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   punch: {fileID: 4627211171531419773}
   raycastStartPoint: {fileID: 5447106047923327159}
+  test: {x: 0, y: -180, z: 0, w: 0}
 --- !u!50 &6258674923241964333
 Rigidbody2D:
   serializedVersion: 4

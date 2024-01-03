@@ -2,25 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hitboxes : MonoBehaviour
+public class StandHitboxes : Hitboxes
 {
-    public int damage;
-    //PlayerStats player; 
     // Start is called before the first frame update
-    void Start()
-    {
-        //player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
 
-    }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-
-    public void OnTriggerEnter2D(Collider2D collision)
+    public new void OnTriggerEnter2D(Collider2D collision)
     {
 
         switch (collision.gameObject.tag.ToLower())
@@ -30,16 +19,12 @@ public class Hitboxes : MonoBehaviour
                 collision.gameObject.GetComponent<PARENTENEMY>().health -= damage;
                 break;
             case "vulnerable":
-                Debug.Log("Collided with vulnerable"); 
+                Debug.Log("Collided with vulnerable");
                 //collision.gameObject.GetComponentInParent<PARENTENEMY>().health -= damage;
                 break;
-            case "test":
-                Debug.Log("Test");
-                break; 
+            case "invulnerable":
+                collision.gameObject.GetComponent<PARENTENEMY>().health -= damage;
+                break;
         }
     }
-
-
-
-
 }

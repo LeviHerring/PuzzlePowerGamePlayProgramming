@@ -26,13 +26,16 @@ public class PlayerMovement : MonoBehaviour
     Transform mask;
     public bool canMove = true;
     public Transform firePoint;
-    bool hasHacked = false; 
+    bool hasHacked = false;
+    public bool IsOnLadder;
+    public bool isMultipleChoice; 
 
     //GameObjects
     public GameObject mapPanel;
     public GameObject bomb;
-    public GameObject Drone;
-    public GameObject StarPlatinum;
+    public GameObject drone;
+    public GameObject dog;
+    public GameObject starPlatinum;
     public GameObject bullet;
     public GameObject hackHitbox; 
     // Start is called before the first frame update
@@ -82,6 +85,14 @@ public class PlayerMovement : MonoBehaviour
                     Flip();
                 }
                 
+            }
+
+            if(IsOnLadder)
+            {
+                if(Input.GetKey(KeyCode.W))
+                {
+                    rigidbody.velocity = new Vector2(rigidbody.velocity.x, 2f);
+                }
             }
         }
         
@@ -152,7 +163,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (canMove)
         {
-            if (Input.GetKeyDown(KeyCode.S) && GroundCheck() && powerManagement.powersUnlocked[1])
+            if (Input.GetKeyDown(KeyCode.S) && GroundCheck() && powerManagement.powersUnlocked[1] && isMultipleChoice == false)
             {
                 isCharging = true;
 
@@ -240,9 +251,35 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(Cooldown()); 
         }
 
-        if(Input.GetKeyDown(KeyCode.M) && powerManagement.itemsUnlocked[1] == true && canUseSpecial == true )
+        if(Input.GetKey(KeyCode.M) && powerManagement.itemsUnlocked[1] == true && canUseSpecial == true )
         {
-            Instantiate(Drone, transform.position, Quaternion.identity);
+            isMultipleChoice = true; 
+        //    if(Input.GetKey(KeyCode.W) && isMultipleChoice == true)
+        //    {
+        //        Instantiate(drone, transform.position, Quaternion.identity);
+        //        isMultipleChoice = false; 
+        //    }
+        //    if(Input.GetKey(KeyCode.S) && isMultipleChoice == true)
+        //    {
+        //        Instantiate(dog, transform.position, Quaternion.identity);
+        //        isMultipleChoice = true; 
+        //    }
+            
+        //    StartCoroutine(Cooldown());
+        }
+
+        if(isMultipleChoice == true && canMove == true)
+        {
+            if (Input.GetKey(KeyCode.W) && isMultipleChoice == true)
+            {
+                Instantiate(drone, transform.position, Quaternion.identity);
+                isMultipleChoice = false;               
+            }
+            if (Input.GetKey(KeyCode.S) && isMultipleChoice == true)
+            {
+                Instantiate(dog, transform.position, Quaternion.Euler(new Vector3(0, 0, 89.31f)));
+                isMultipleChoice = false;
+            }
             StartCoroutine(Cooldown());
         }
         if (Input.GetKeyDown(KeyCode.Period) && powerManagement.itemsUnlocked[3] == true)
@@ -251,7 +288,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.B) && powerManagement.itemsUnlocked[4] == true && canUseSpecial == true)
         {
-            Instantiate(StarPlatinum, transform.position, Quaternion.identity);
+            Instantiate(starPlatinum, transform.position, transform.rotation);
             StartCoroutine(Cooldown());
         }
         if(powerManagement.itemsUnlocked[5] == true)

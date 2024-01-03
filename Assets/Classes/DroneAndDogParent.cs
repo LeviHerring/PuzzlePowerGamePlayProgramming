@@ -33,6 +33,8 @@ public class DroneAndDogParent : MonoBehaviour
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
         player.GetComponent<Collider2D>().enabled = false; 
         timeLeftAlive = 10;
+        player.GetComponent<PlayerMovement>().canMove = false;
+        player.GetComponent<PlayerMovement>().isMultipleChoice = false;
     }
 
 
@@ -44,6 +46,7 @@ public class DroneAndDogParent : MonoBehaviour
         player.GetComponent<SpriteRenderer>().enabled = true;
         cameraFollow.player = player;
         panel.SetActive(false);
+        player.GetComponent<PlayerMovement>().canMove = true; 
         Destroy(gameObject);
     }
    
