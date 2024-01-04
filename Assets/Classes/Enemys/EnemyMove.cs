@@ -307,7 +307,7 @@ public class EnemyMove : MonoBehaviour
                 {
                     //rigidbody.velocity = new Vector2(5, rigidbody.velocity.y);
                 }
-                if(player.transform.position.x - transform.position.x < 4)
+                if(player.transform.position.x - transform.position.x < 2)
                 {
                     Debug.Log("It is less!"); 
                     Debug.Log(player.transform.position.x - transform.position.x); 

@@ -9,7 +9,6 @@ TagManager:
   - Moveable
   - Hitbox
   - Weapon
-  - EnemyHitbox
   - Test
   - Vulnerable
   - CanTeleportThrough
@@ -17,6 +16,7 @@ TagManager:
   - Ladder
   - Invulnerable
   - PlayerBullet
+  - EnemyHitbox
   layers:
   - Default
   - TransparentFX

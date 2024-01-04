@@ -141,8 +141,9 @@ MonoBehaviour:
   enemyName: goblin
   damageDealt: 1
   speed: 0.5
-  xpValue: 2
+  xpValue: 4
   xp: {fileID: 8516684812663103485, guid: e05d6892689d7b342b6b61f3b28633f3, type: 3}
+  area: 0
 --- !u!61 &7928472159086659814
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -243,8 +244,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b872b977e10ac4ab48474f190f871d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 8421984273800274650, guid: ab3545f16a0523646b61cda829ab2797, type: 3}
+  bullet: {fileID: 1175240217266511684, guid: 58278b728843da8429899b3b113c9bdc, type: 3}
   bulletSpawnPos: {fileID: 6090658384121658790}
+  shootingType: 0
 --- !u!1 &5469911069037010580
 GameObject:
   m_ObjectHideFlags: 0

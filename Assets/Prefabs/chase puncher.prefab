@@ -169,10 +169,11 @@ MonoBehaviour:
   isDead: 0
   health: 10
   enemyName: chasepuncher
-  damageDealt: 1
+  damageDealt: 5
   speed: 0.5
   xpValue: 2
   xp: {fileID: 8516684812663103485, guid: e05d6892689d7b342b6b61f3b28633f3, type: 3}
+  area: 0
 --- !u!61 &5903201347157729545
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -257,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc935fe297c47f4d94f853223620f04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayCastLeftTransform: {fileID: 0}
+  rayCastLeftTransform: {fileID: 5524428663068455589}
   rayCastRightTransform: {fileID: 8409877574647258333}
   punchHitbox: {fileID: 9094404934439117415}
   raycastLength: {x: 10, y: 0, z: 0}
@@ -273,7 +274,7 @@ GameObject:
   - component: {fileID: 4872488158549627556}
   m_Layer: 0
   m_Name: Punch
-  m_TagString: Untagged
+  m_TagString: EnemyHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

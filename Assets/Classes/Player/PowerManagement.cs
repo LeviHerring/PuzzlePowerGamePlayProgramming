@@ -70,24 +70,24 @@ public class PowerManagement : MonoBehaviour
     {
         switch (stats.xpLevel)
         {
-            case 2:
+            case 1:
                 strengthUnlocked = true;
                 powersUnlocked[0] = true;
                 //activates strength power 
                 break;
-            case 5:
+            case 3:
                 powersUnlocked[1] = true;
                 //unlocks super mario bros 2/doki doki panic type charged jump 
                 break;
-            case 7:
+            case 4:
                 powersUnlocked[2] = true;
                 //phase 
                 break;
-            case 10:
+            case 5:
                 powersUnlocked[3] = true;
                 //activates 2 powers
                 break;
-            case 12:
+            case 6:
                 powersUnlocked[4] = true;
                 InstanstiateMask(); 
                 //activates disguise 

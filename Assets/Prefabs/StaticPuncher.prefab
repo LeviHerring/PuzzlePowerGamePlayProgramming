@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3961039633717395143}
   m_Layer: 0
   m_Name: Punch
-  m_TagString: Untagged
+  m_TagString: EnemyHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -242,12 +242,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5748e065e26da6a4ebea5851efa4a1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  hasBeenChecked: 0
+  isDead: 0
+  health: 5
   enemyName: staticpuncher
-  damageDealt: 1
+  damageDealt: 3
   speed: 0.5
   xpValue: 2
   xp: {fileID: 8516684812663103485, guid: e05d6892689d7b342b6b61f3b28633f3, type: 3}
+  area: 0
 --- !u!61 &6905157758920964728
 BoxCollider2D:
   m_ObjectHideFlags: 0

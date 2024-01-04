@@ -211,12 +211,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5748e065e26da6a4ebea5851efa4a1f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasBeenChecked: 0
+  isDead: 0
   health: 20
   enemyName: thompus
-  damageDealt: 0
+  damageDealt: 10
   speed: 0
   xpValue: 5
   xp: {fileID: 8516684812663103485, guid: e05d6892689d7b342b6b61f3b28633f3, type: 3}
+  area: 0
 --- !u!114 &6272725855933281386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,7 +268,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.000000059604645, y: -0.0054070055}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -276,7 +279,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9320067, y: 0.92430204}
   m_EdgeRadius: 0
 --- !u!50 &1427533632244712625
 Rigidbody2D:

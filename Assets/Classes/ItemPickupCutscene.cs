@@ -33,6 +33,7 @@ public class ItemPickupCutscene : MonoBehaviour
             panel.SetActive(true);
             titleText.text = title;
             descriptionText.text = description;
+            //StartCoroutine(panel.GetComponent<ItemDescriptionPanel>().Cutscene()); 
            
         }
     }

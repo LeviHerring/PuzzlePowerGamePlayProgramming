@@ -8,56 +8,34 @@ public class LevelManager : MonoBehaviour
     public GameObject playerObject; 
     PlayerStats player;
     PARENTENEMY[] enemies;
-    [SerializeField] int levelMilestone;
-    bool hasRun = false; 
+    [SerializeField] int levelMilestone = 0;
+    public bool hasRun = false; 
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<PlayerStats>(); 
+        player = FindObjectOfType<PlayerStats>();
+        levelMilestone = 0; 
     }
 
     // Update is called once per frame
     void Update()
     {
-      levelMilestone = player.xpLevel; 
-        if(hasRun == false)
-        {
-            switch (levelMilestone)
+      
+
+           if(levelMilestone < player.xpLevel)
             {
-                case 5:
-                    LevelUp();
-                    break;
-                //case 6:
-                //    hasRun = false;
-                //    break;
-                case 10:
-                    LevelUp();
-                    break;
-                case 11:
-                    hasRun = true;
-                    break;
+            hasRun = false; 
+              LevelUp(); 
             }
-           switch(player.itemsUnlocked)
-            {
-                case 1:
-                    LevelUp();
-                    break;
-                case 2:
-                    LevelUp();
-                    break;
-                case 3:
-                    LevelUp();
-                    break; 
-            }
-        }
     
 
 
       
     }
 
-    void LevelUp()
+    public void LevelUp()
     {
+        levelMilestone++; 
         enemies = FindObjectsOfType<PARENTENEMY>();
         if(hasRun == false)
         {

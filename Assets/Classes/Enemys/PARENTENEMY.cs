@@ -11,10 +11,57 @@ public class PARENTENEMY : MonoBehaviour
     public int damageDealt;
     public float speed;
     public int xpValue;
-    public GameObject xp; 
+    public GameObject xp;
+    public areaFrom area; 
+
+    public enum areaFrom
+    {
+        Start,
+        Strength,
+        HighJump,
+        Phase,
+        Disguise,
+        Hacking,
+        FinalLevel
+
+    }
     private void Start()
     {
-        
+        switch(area)
+        {
+            case areaFrom.Strength:
+                health += 3;
+                damageDealt += 1;
+                xpValue += 1; 
+                break;
+            case areaFrom.HighJump:
+                health += 4;
+                damageDealt += 1;
+                xpValue += 1; 
+                break;
+            case areaFrom.Phase:
+                health *= 2;
+                damageDealt += 3;
+                xpValue += 4;
+                break;
+            case areaFrom.Disguise:
+                health += 8;
+                damageDealt += 3;
+                xpValue += 4;
+                break;
+            case areaFrom.Hacking:
+                health += 9;
+                damageDealt += 4;
+                xpValue += 5;
+                break;
+            case areaFrom.FinalLevel:
+                health *= 4;
+                damageDealt += 10;
+                xpValue += 10;
+                break; 
+
+
+        }
     }
 
     private void Update()

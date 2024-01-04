@@ -32,12 +32,13 @@ public class PlayerCollision : MonoBehaviour
         switch (collision.gameObject.tag.ToLower())
         {
             case "enemy":
-                playerStats.currentHealth--;
+                playerStats.currentHealth -= collision.gameObject.GetComponent<PARENTENEMY>().damageDealt;
                 damageCooldown = -1;
                 StartCoroutine(TookDamage()); 
                 break;
             case "enemyhitbox":
-                playerStats.currentHealth -= 5;
+                Debug.Log("Collided with player"); 
+                //playerStats.currentHealth -= collision.gameObject.GetComponentInParent<PARENTENEMY>().damageDealt + 2;
                 damageCooldown = -1;
                 StartCoroutine(TookDamage());
                 break; 
@@ -49,6 +50,19 @@ public class PlayerCollision : MonoBehaviour
             case "spiker":
                 playerStats.currentHealth -= playerStats.currentHealth;
                 break; 
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (collision.gameObject.tag.ToLower())
+        {
+            case "enemyhitbox":
+                Debug.Log("Collided with player");
+                playerStats.currentHealth -= collision.gameObject.GetComponentInParent<PARENTENEMY>().damageDealt + 2;
+                damageCooldown = -1;
+                StartCoroutine(TookDamage());
+                break;
         }
     }
 

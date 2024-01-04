@@ -13,7 +13,8 @@ public class PlayerStats : MonoBehaviour
     public int maxXp;
     public bool hasWeapon;
     public Transform checkpoint;
-    public int itemsUnlocked; 
+    public int itemsUnlocked;
+    public Hitboxes[] hitboxes; 
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,8 @@ public class PlayerStats : MonoBehaviour
         {
             
             xpLevel++;
+            maxHealth++;
+            DamageLevelUp();  
             xpAmount = 0; 
             maxXp += 5; 
 
@@ -65,5 +68,13 @@ public class PlayerStats : MonoBehaviour
         
        
 
+    }
+
+    void DamageLevelUp()
+    {
+        foreach(Hitboxes h in hitboxes)
+        {
+            h.damage++; 
+        }
     }
 }
