@@ -44,7 +44,8 @@ public class PlayerCombat : MonoBehaviour
             }
             if (hasWeapon)
             {
-               
+                GameObject weapon = GetComponentInChildren<Weapons>().gameObject;
+                weapon.GetComponent<Weapons>().Attack(); 
             }
           
         }

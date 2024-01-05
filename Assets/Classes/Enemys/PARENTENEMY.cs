@@ -7,6 +7,7 @@ public class PARENTENEMY : MonoBehaviour
     public bool hasBeenChecked; 
     public bool isDead; 
     public int health;
+    public int maxHealth; 
     public string enemyName;
     public int damageDealt;
     public float speed;
@@ -31,31 +32,37 @@ public class PARENTENEMY : MonoBehaviour
         {
             case areaFrom.Strength:
                 health += 3;
+                maxHealth += 3;
                 damageDealt += 1;
                 xpValue += 1; 
                 break;
             case areaFrom.HighJump:
                 health += 4;
+                maxHealth += 4;
                 damageDealt += 1;
                 xpValue += 1; 
                 break;
             case areaFrom.Phase:
                 health *= 2;
+                maxHealth *= 2;
                 damageDealt += 3;
                 xpValue += 4;
                 break;
             case areaFrom.Disguise:
                 health += 8;
+                maxHealth += 8;
                 damageDealt += 3;
                 xpValue += 4;
                 break;
             case areaFrom.Hacking:
                 health += 9;
+                maxHealth += 9;
                 damageDealt += 4;
                 xpValue += 5;
                 break;
             case areaFrom.FinalLevel:
                 health *= 4;
+                maxHealth *= 4;
                 damageDealt += 10;
                 xpValue += 10;
                 break; 
@@ -68,12 +75,17 @@ public class PARENTENEMY : MonoBehaviour
     {
         if(health <= 0)
         {
-            OnDeath(); 
+            if(isDead == false)
+            {
+                OnDeath();
+            }
+            
         }
     }
 
     void OnDeath()
     {
+       
         int randomXpAmount = Random.Range(0, xpValue);
         Debug.Log(randomXpAmount);
         if(randomXpAmount > 0)
@@ -85,8 +97,22 @@ public class PARENTENEMY : MonoBehaviour
                 Instantiate(xp, randomPos, Quaternion.identity); 
             }
         }
-        isDead = true; 
-        gameObject.SetActive(false);
+        isDead = true;
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+        StartCoroutine(Respawn()); 
+    }
+
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(10f);
+        health = maxHealth;
+        GetComponent<Collider2D>().enabled = true;
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        GetComponent<SpriteRenderer>().enabled = true;
+        isDead = false; 
     }
 
 

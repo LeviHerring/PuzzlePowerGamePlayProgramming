@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    private static PlayerStats instance;
+    public static PlayerStats Instance { get => instance; }
+
     public int maxHealth;
     public int currentHealth;
     public float speed;
@@ -14,9 +17,21 @@ public class PlayerStats : MonoBehaviour
     public bool hasWeapon;
     public Transform checkpoint;
     public int itemsUnlocked;
-    public Hitboxes[] hitboxes; 
+    public Hitboxes[] hitboxes;
 
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
     void Start()
     {
         

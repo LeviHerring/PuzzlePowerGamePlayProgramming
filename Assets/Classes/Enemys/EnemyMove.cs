@@ -23,7 +23,8 @@ public class EnemyMove : MonoBehaviour
     Vector3 batPointA;
     Vector3 batPointB;
     public GameObject punchHitbox;
-    [SerializeField] Vector3 raycastLength; 
+    [SerializeField] Vector3 raycastLength;
+     
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +43,11 @@ public class EnemyMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveFunction();
+        if(!enemyScript.isDead)
+        {
+            MoveFunction();
+        }
+        
     }
 
     void MoveFunction()

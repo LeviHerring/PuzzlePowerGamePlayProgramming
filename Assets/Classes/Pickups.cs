@@ -12,7 +12,8 @@ public class Pickups : MonoBehaviour
     GameObject player;
     public SpriteRenderer spriteRenderer;
     [SerializeField] public bool isEquipped;
-    new public string name; 
+    new public string name;
+    [SerializeField] public Vector3 newPosition; 
     
     // Start is called before the first frame update
     public void Start()
@@ -26,7 +27,7 @@ public class Pickups : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -38,18 +39,22 @@ public class Pickups : MonoBehaviour
             newParent = player.transform;
             if(player.GetComponent<PlayerCombat>().hasWeapon == true)
             {
-                if(player.GetComponentInChildren<Pickups>().name == gameObject.name) 
+                if(isEquipped == true)
                 {
-                    Object.Destroy(gameObject);
+                    if (player.GetComponentInChildren<Pickups>().name == gameObject.name)
+                    {
+                        Object.Destroy(gameObject);
+                    }
+                    else
+                    {
+                        Destroy(player.GetComponentInChildren<Pickups>().gameObject);
+                        isEquipped = true;
+                        player.GetComponent<PlayerCombat>().hasWeapon = true;
+                        myTransform.parent = newParent;
+                        StartCoroutine(FlickerAnimation());
+                    }
                 }
-                else
-                {
-                    Destroy(player.GetComponentInChildren<Pickups>().gameObject);
-                    isEquipped = true;
-                    player.GetComponent<PlayerCombat>().hasWeapon = true;
-                    myTransform.parent = newParent;
-                    StartCoroutine(FlickerAnimation());
-                }
+              
                 //checks what weapon player is holding and does stuff depending on that 
 
                
@@ -76,6 +81,11 @@ public class Pickups : MonoBehaviour
                 isEquipped = true;
                 player.GetComponent<PlayerCombat>().hasWeapon = true;
                 myTransform.parent = newParent;
+                //transform.position = player.transform.position + new Vector3(0.5f, 1f, 0f);
+                transform.localPosition = newPosition;
+                transform.localRotation = Quaternion.Euler(0, 180, 0);
+  
+                
 
                 StartCoroutine(FlickerAnimation());
             }
@@ -114,6 +124,14 @@ public class Pickups : MonoBehaviour
                 
             }
 
+        }
+        if(collision.gameObject.tag.ToLower() == "enemy" && gameObject.tag.ToLower() == "weapon" && isEquipped == true)
+        {
+            if(isEquipped)
+            {
+                collision.GetComponent<PARENTENEMY>().health -= GetComponent<Weapons>().damage; 
+            }
+            
         }
 
     }

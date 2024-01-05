@@ -5,12 +5,27 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    private static LevelManager instance;
+    public static LevelManager Instance { get => instance; } 
+
     public GameObject playerObject; 
     PlayerStats player;
     PARENTENEMY[] enemies;
     [SerializeField] int levelMilestone = 0;
-    public bool hasRun = false; 
+    public bool hasRun = false;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this; 
+        }
+    }
     void Start()
     {
         player = FindObjectOfType<PlayerStats>();
@@ -42,6 +57,7 @@ public class LevelManager : MonoBehaviour
             foreach (var enemy in enemies)
             {
                 enemy.health++;
+                enemy.maxHealth++; 
                 enemy.damageDealt++;
                 enemy.xpValue++;
 
