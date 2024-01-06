@@ -167,11 +167,16 @@ MonoBehaviour:
   hasBeenChecked: 0
   isDead: 0
   health: 6
+  maxHealth: 0
   enemyName: Goblin
   damageDealt: 1
   speed: 0.5
   xpValue: 2
   xp: {fileID: 8516684812663103485, guid: e05d6892689d7b342b6b61f3b28633f3, type: 3}
+  area: 0
+  drops:
+  - {fileID: 7026344560474347181, guid: b7e0651cd3346ba488a0084d12ba6396, type: 3}
+  - {fileID: 3355751170370814403, guid: 274d29057c80d4c4490edd4e167b059c, type: 3}
 --- !u!61 &1303749569862968809
 BoxCollider2D:
   m_ObjectHideFlags: 0

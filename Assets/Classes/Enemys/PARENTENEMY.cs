@@ -13,7 +13,8 @@ public class PARENTENEMY : MonoBehaviour
     public float speed;
     public int xpValue;
     public GameObject xp;
-    public areaFrom area; 
+    public areaFrom area;
+    public GameObject[] drops; 
 
     public enum areaFrom
     {
@@ -85,9 +86,18 @@ public class PARENTENEMY : MonoBehaviour
 
     void OnDeath()
     {
-       
+        int randomDrop = Random.Range(0, 15); 
         int randomXpAmount = Random.Range(0, xpValue);
         Debug.Log(randomXpAmount);
+        switch (randomDrop)
+        {
+            case 1:
+                Instantiate(drops[randomDrop-1], transform.position, Quaternion.identity);
+                break;
+            case 2:
+                Instantiate(drops[randomDrop - 1], transform.position, Quaternion.identity);
+                break;
+        }
         if(randomXpAmount > 0)
         {
             for(int x =0; x < randomXpAmount; x++)

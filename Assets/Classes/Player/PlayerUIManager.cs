@@ -6,11 +6,26 @@ using TMPro;
 
 public class PlayerUIManager : MonoBehaviour
 {
+    private static PlayerUIManager instance;
+    public static PlayerUIManager Instance { get => instance; }
+
     GameObject player; 
     PlayerStats playerStats;
     public Image xpBar;
-    public GameObject[] panels; 
-    
+    public GameObject[] panels;
+
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {

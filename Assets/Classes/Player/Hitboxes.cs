@@ -27,7 +27,7 @@ public class Hitboxes : MonoBehaviour
         {
             case "enemy":
                 Debug.Log("Collided");
-                collision.gameObject.GetComponent<PARENTENEMY>().health -= damage;
+                collision.gameObject.GetComponent<PARENTENEMY>().health -= PlayerStats.Instance.attackStat/2 + damage;
                 break;
             case "vulnerable":
                 Debug.Log("Collided with vulnerable"); 

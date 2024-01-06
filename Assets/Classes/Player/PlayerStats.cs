@@ -18,6 +18,8 @@ public class PlayerStats : MonoBehaviour
     public Transform checkpoint;
     public int itemsUnlocked;
     public Hitboxes[] hitboxes;
+    public int statPoints;
+    public int attackStat; 
 
     // Start is called before the first frame update
 
@@ -53,9 +55,10 @@ public class PlayerStats : MonoBehaviour
             xpLevel++;
             maxHealth++;
             DamageLevelUp();  
-            xpAmount = 0; 
-            maxXp += 5; 
-
+            xpAmount = 0;
+            statPoints++; 
+            maxXp += 5;
+            LevelUpUI(); 
         }
     }
 
@@ -91,5 +94,11 @@ public class PlayerStats : MonoBehaviour
         {
             h.damage++; 
         }
+    }
+
+    void LevelUpUI()
+    {
+        PlayerUIManager.Instance.panels[6].SetActive(true);
+        Time.timeScale = 0; 
     }
 }
