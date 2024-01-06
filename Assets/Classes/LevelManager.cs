@@ -56,10 +56,11 @@ public class LevelManager : MonoBehaviour
         {
             foreach (var enemy in enemies)
             {
-                enemy.health++;
-                enemy.maxHealth++; 
-                enemy.damageDealt++;
-                enemy.xpValue++;
+                int random = Random.Range(0, 2);
+                enemy.health += random;
+                enemy.maxHealth += random; 
+                enemy.damageDealt += Random.Range(0, 2); ;
+                enemy.xpValue += Random.Range(0,2);
 
             }
             hasRun = true; 

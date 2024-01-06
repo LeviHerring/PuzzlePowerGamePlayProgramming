@@ -12,7 +12,7 @@ public class HealthPotionDrop : DroppedItems
     public void Effect()
     {
         Debug.Log("In the health potion"); 
-        if(PlayerStats.Instance.currentHealth < PlayerStats.Instance.maxHealth)
+        if(PlayerStats.Instance.currentHealth < PlayerStats.Instance.maxHealth - PlayerStats.Instance.currentHealth)
         {
             amountGiven = Random.Range(1, PlayerStats.Instance.maxHealth/2);
             PlayerStats.Instance.currentHealth += amountGiven;

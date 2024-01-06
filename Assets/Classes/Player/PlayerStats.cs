@@ -54,9 +54,14 @@ public class PlayerStats : MonoBehaviour
             
             xpLevel++;
             maxHealth++;
+            if(currentHealth < maxHealth)
+            {
+                currentHealth++; 
+            }
             DamageLevelUp();  
             xpAmount = 0;
-            statPoints++; 
+            statPoints++;
+            attackStat++; 
             maxXp += 5;
             LevelUpUI(); 
         }

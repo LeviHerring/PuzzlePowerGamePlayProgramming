@@ -10,7 +10,7 @@ public class XPDrop : DroppedItems
     }
     public void Effect()
     {
-        amountGiven = Random.Range(1, PlayerStats.Instance.maxXp);
+        amountGiven = Random.Range(1, (PlayerStats.Instance.maxXp - PlayerStats.Instance.xpAmount) - 1);
         PlayerStats.Instance.xpAmount += amountGiven;
         Destroy(gameObject);
     }

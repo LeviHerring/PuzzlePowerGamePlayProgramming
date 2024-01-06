@@ -44,8 +44,8 @@ public class PARENTENEMY : MonoBehaviour
                 xpValue += 1; 
                 break;
             case areaFrom.Phase:
-                health *= 2;
-                maxHealth *= 2;
+                health += 5;
+                maxHealth += 5;
                 damageDealt += 3;
                 xpValue += 4;
                 break;
@@ -62,10 +62,10 @@ public class PARENTENEMY : MonoBehaviour
                 xpValue += 5;
                 break;
             case areaFrom.FinalLevel:
-                health *= 4;
-                maxHealth *= 4;
-                damageDealt += 10;
-                xpValue += 10;
+                health += 10;
+                maxHealth += 10;
+                damageDealt += 5;
+                xpValue += 7;
                 break; 
 
 

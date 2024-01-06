@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    bool isActive; 
+    bool isActive;
+    public GameObject positionOnMap; 
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +18,12 @@ public class Map : MonoBehaviour
         if(gameObject.activeSelf)
         {
             isActive = true;
+            positionOnMap.SetActive(true); 
         }
         else
         {
-            isActive = false; 
+            isActive = false;
+            positionOnMap.SetActive(false);
         }
        ToggleMap();
 
@@ -33,7 +36,8 @@ public class Map : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Time.timeScale = 1f; 
-                gameObject.SetActive(false); 
+                gameObject.SetActive(false);
+                positionOnMap.SetActive(false);
             }
         }
     }
