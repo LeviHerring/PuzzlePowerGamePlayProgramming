@@ -13,7 +13,10 @@ public class PlayerUIManager : MonoBehaviour
     PlayerStats playerStats;
     public Image xpBar;
     public GameObject[] panels;
-
+    public bool isPaused;
+    public bool canBePressed;
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI xpText;
 
     private void Awake()
     {
@@ -30,13 +33,28 @@ public class PlayerUIManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        playerStats = player.GetComponent<PlayerStats>(); 
+        playerStats = player.GetComponent<PlayerStats>();
+        panels[7].SetActive(true);
+        isPaused = true;
+        canBePressed = true; 
+        Time.timeScale = 0; 
     }
 
     // Update is called once per frame
     void Update()
     {
-        XpBarFill();  
+        XpBarFill();
+        SetText(); 
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                isPaused = !isPaused;
+                Time.timeScale = isPaused ? 0:1;
+             
+                panels[7].SetActive(isPaused);
+              
+            }
+
+      
     }
 
     void XpBarFill()
@@ -45,5 +63,12 @@ public class PlayerUIManager : MonoBehaviour
         float maxXpFloat = playerStats.maxXp; 
         xpBar.fillAmount = (xpAmountFloat / maxXpFloat);
         //Debug.Log(xpBar.fillAmount); 
-    }    
+    }
+
+
+    void SetText()
+    {
+        xpText.text = "Level " + playerStats.xpLevel.ToString() + " " + playerStats.xpAmount.ToString() + "/" + playerStats.maxXp.ToString();
+        healthText.text = playerStats.currentHealth.ToString() + "/" + playerStats.maxHealth.ToString(); 
+    }
 }

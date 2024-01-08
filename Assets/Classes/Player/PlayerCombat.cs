@@ -45,7 +45,9 @@ public class PlayerCombat : MonoBehaviour
             if (hasWeapon)
             {
                 GameObject weapon = GetComponentInChildren<Weapons>().gameObject;
-                weapon.GetComponent<Weapons>().Attack(); 
+                weapon.GetComponent<Weapons>().Attack();
+                canAttack = false;
+                StartCoroutine((Cooldown())); 
             }
           
         }
@@ -66,13 +68,13 @@ public class PlayerCombat : MonoBehaviour
     {
         canAttack = false;
         hitboxes[hitboxNumber].SetActive(true);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSecondsRealtime(0.3f);
         hitboxes[hitboxNumber].SetActive(false);
     }
 
     IEnumerator Cooldown()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
         canAttack = true; 
     }
 }

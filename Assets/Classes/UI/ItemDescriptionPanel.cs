@@ -7,7 +7,7 @@ public class ItemDescriptionPanel : MonoBehaviour
 {
     LevelManager levelmanager; 
     public GameObject canToggleOffText;
-    bool canToggle;
+    public bool canToggle;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +29,8 @@ public class ItemDescriptionPanel : MonoBehaviour
             levelmanager.LevelUp();
             canToggleOffText.SetActive(false);
             gameObject.SetActive(false);
-            canToggle = false;
+            canToggle = false;          
+            PlayerStats.Instance.isUnlockedCutseneOn = false;
         }
     }
 

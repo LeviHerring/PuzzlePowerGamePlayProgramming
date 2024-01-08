@@ -13,7 +13,14 @@ public class EnemyCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(GetComponentInParent<PARENTENEMY>().isDead == true)
+        {
+            GetComponent<Collider2D>().enabled = false;
+        }
+        else
+        {
+            GetComponent<Collider2D>().enabled = true; 
+        }
     }
 
 

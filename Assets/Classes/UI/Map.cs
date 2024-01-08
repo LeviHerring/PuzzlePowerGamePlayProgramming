@@ -33,7 +33,7 @@ public class Map : MonoBehaviour
     {
         if (isActive)
         {
-            if(Input.GetKeyDown(KeyCode.Mouse0))
+            if(Input.GetKeyDown(KeyCode.M))
             {
                 Time.timeScale = 1f; 
                 gameObject.SetActive(false);

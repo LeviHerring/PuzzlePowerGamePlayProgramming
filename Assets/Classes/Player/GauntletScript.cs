@@ -37,15 +37,14 @@ public class GauntletScript : MonoBehaviour
     {
         if(hasActivatedGauntlet)
         {
-            if(Input.GetKeyDown(KeyCode.X) && hasActivatedGauntlet == true && isAttackActivated == false)
+            if(Input.GetKeyDown(KeyCode.Keypad8) && hasActivatedGauntlet == true && isAttackActivated == false)
             {
-                Debug.Log("Yippee!"); 
                 isAttackActivated = true;
                 playerMovement.canMove = false; 
                 Levitating(); 
                 StartCoroutine(Countdown(10)); 
             }
-            if (Input.GetKeyDown(KeyCode.G) && hasActivatedGauntlet == true && isAttackActivated == false)
+            if (Input.GetKeyDown(KeyCode.Keypad2) && hasActivatedGauntlet == true && isAttackActivated == false)
             {
                 isAttackActivated = true;
                 playerMovement.canMove = false;

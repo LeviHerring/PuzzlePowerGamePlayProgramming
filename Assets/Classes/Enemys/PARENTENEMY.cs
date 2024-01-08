@@ -50,7 +50,7 @@ public class PARENTENEMY : MonoBehaviour
                 xpValue += 4;
                 break;
             case areaFrom.Disguise:
-                health += 8;
+                health += 7;
                 maxHealth += 8;
                 damageDealt += 3;
                 xpValue += 4;
@@ -87,7 +87,7 @@ public class PARENTENEMY : MonoBehaviour
     void OnDeath()
     {
         int randomDrop = Random.Range(0, 15); 
-        int randomXpAmount = Random.Range(0, xpValue);
+        int randomXpAmount = Random.Range(1, xpValue);
         Debug.Log(randomXpAmount);
         switch (randomDrop)
         {

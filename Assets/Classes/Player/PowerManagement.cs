@@ -79,15 +79,15 @@ public class PowerManagement : MonoBehaviour
                 powersUnlocked[1] = true;
                 //unlocks super mario bros 2/doki doki panic type charged jump 
                 break;
-            case 4:
+            case 6:
                 powersUnlocked[2] = true;
                 //phase 
                 break;
-            case 5:
+            case 8:
                 powersUnlocked[3] = true;
                 //activates 2 powers
                 break;
-            case 6:
+            case 11:
                 powersUnlocked[4] = true;
                 InstanstiateMask(); 
                 //activates disguise 

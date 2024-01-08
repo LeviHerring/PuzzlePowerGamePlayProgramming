@@ -23,6 +23,7 @@ public class LevelUpButtons : MonoBehaviour
         if(PlayerStats.Instance.statPoints > 0)
         {
             PlayerStats.Instance.maxHealth++;
+            PlayerStats.Instance.currentHealth++; 
             PlayerStats.Instance.statPoints--;
         }
         else

@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using UnityEngine.SceneManagement; 
 
 public class Interactables : MonoBehaviour
 {
@@ -26,7 +27,8 @@ public class Interactables : MonoBehaviour
         Lever,
         PressurePlate,
         Sign,
-        NewArea
+        NewArea, 
+        EndGame
     } 
     // Start is called before the first frame update
     void Start()
@@ -64,7 +66,9 @@ public class Interactables : MonoBehaviour
                     }
                     break;
                 case InteractableTypes.NewArea:
-                    StartCoroutine(NewArea());
+                    break;
+                case InteractableTypes.EndGame:
+                    NewScene();  
                     break;
             }
             interactButton.SetActive(true); 
@@ -82,14 +86,25 @@ public class Interactables : MonoBehaviour
         {
             hasBeenInteractedWith = true;
         }
-       
+       if(type == InteractableTypes.NewArea)
+        {
+            StartCoroutine(NewArea()); 
+        }
         
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        hasBeenInteractedWith = false;
-        interactButton.SetActive(false); 
+        if(type == InteractableTypes.EndGame)
+        {
+            return; 
+        }
+        else
+        {
+            hasBeenInteractedWith = false;
+            interactButton.SetActive(false);
+        }
+    
     }
 
     IEnumerator Button()
@@ -214,4 +229,8 @@ public class Interactables : MonoBehaviour
         SignCanvas.SetActive(false); 
     }
     
+    void NewScene()
+    {
+        SceneManager.LoadScene(1); 
+    }
 }

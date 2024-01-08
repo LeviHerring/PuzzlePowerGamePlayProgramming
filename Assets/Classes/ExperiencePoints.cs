@@ -10,7 +10,7 @@ public class ExperiencePoints : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        experienceValue = Random.Range(1, 10);
+        experienceValue = Random.Range(1, 7);
         player = GameObject.FindGameObjectWithTag("Player"); 
     }
 

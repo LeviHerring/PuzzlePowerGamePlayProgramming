@@ -18,7 +18,7 @@ public class PlayerCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(hasTakenDamage == true)
+        if(hasTakenDamage == true || playerStats.currentHealth < playerStats.maxHealth)
         {
             damageCooldown += Time.deltaTime;
         }

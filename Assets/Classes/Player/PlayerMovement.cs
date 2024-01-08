@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         Move();
         Jump();
         PowerControls();
-        ItemControls(); 
+        ItemControls();
 
     }
 
@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move()
     {
-        if(canMove)
+        if(canMove && GetIsPaused() == false)
         {
             if (Input.GetKey(KeyCode.D))
             {
@@ -100,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump()
     {
-        if(canMove)
+        if(canMove && GetIsPaused() == false)
         {
             if (Input.GetKeyDown(KeyCode.Space) && GroundCheck())
             {
@@ -138,163 +138,182 @@ public class PlayerMovement : MonoBehaviour
 
     void Flip()
     {
-        isFacingRight = !isFacingRight;
-        transform.Rotate(0f, 180f, 0f); 
+        if(GetIsPaused() == false)
+        {
+            isFacingRight = !isFacingRight;
+            transform.Rotate(0f, 180f, 0f);
+        }
+        
         
     }
 
     public void PowerControls()
     {
-        if (powerManagement.canMove && Input.GetKeyDown(KeyCode.K))
+        if(GetIsPaused() == false)
         {
-            if(isFacingRight)
+            if (powerManagement.canMove && Input.GetKeyDown(KeyCode.K))
             {
-                powerManagement.obstacle.strength = 10;
-                
-            }
-            else
-            {
-                powerManagement.obstacle.strength = -10;
-                
-            }
-            powerManagement.obstacle.coroutineNumber = powerManagement.obstacle.obstacleNumberType;
-
-        }
-
-        if (canMove)
-        {
-            if (Input.GetKeyDown(KeyCode.S) && GroundCheck() && powerManagement.powersUnlocked[1] && isMultipleChoice == false)
-            {
-                isCharging = true;
-
-            }
-            if (Input.GetKeyDown(KeyCode.Space) && isCharging == true)
-            {
-                StartCoroutine(ChargeJump());
-            }
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                if (isCharged)
+                if (isFacingRight)
                 {
-                    rigidbody.velocity = new Vector2(rigidbody.velocity.x, playerStats.jumpHeight * 1.3f);
-                    isCharged = false;
-                    isCharging = false;
-                }
-            }
-        }
-        
+                    powerManagement.obstacle.strength = 10;
 
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            if (powerManagement.powersUnlocked[2] && canUseSpecial == true)
-            {
-                if(isFacingRight == true)
-                {
-                    StartCoroutine(PhaseCoroutine(5));
-                }
-                if(isFacingRight == false)
-                {
-                    StartCoroutine(PhaseCoroutine(5));
-                }
-                
-            }
-        }
-
-        if(Input.GetKeyDown(KeyCode.G))
-        {
-            if (powerManagement.powersUnlocked[4])
-            {
-                if(hasPutMaskOn == false)
-                {
-                    mask = gameObject.transform.Find("Mask(Clone)");
-                    mask.gameObject.SetActive(true); 
-                    hasPutMaskOn = true; 
                 }
                 else
                 {
-                    mask.gameObject.SetActive(false);
-                    hasPutMaskOn = false; 
-                }
-                //disguise 
-            }
-        }
+                    powerManagement.obstacle.strength = -10;
 
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            if(powerManagement.powersUnlocked[5])
+                }
+                powerManagement.obstacle.coroutineNumber = powerManagement.obstacle.obstacleNumberType;
+
+            }
+
+            if (canMove)
             {
-                StartCoroutine(Hacking()); 
-                
-               
+                if (Input.GetKeyDown(KeyCode.S) && GroundCheck() && powerManagement.powersUnlocked[1] && isMultipleChoice == false)
+                {
+                    isCharging = true;
+
+                }
+                if(Input.GetKeyUp(KeyCode.S) && GroundCheck() && powerManagement.powersUnlocked[1])
+                {
+                    isCharging = false; 
+                }
+                if (Input.GetKeyDown(KeyCode.Space) && isCharging == true)
+                {
+                    StartCoroutine(ChargeJump());
+                }
+                if (Input.GetKeyUp(KeyCode.Space))
+                {
+                    if (isCharged)
+                    {
+                        rigidbody.velocity = new Vector2(rigidbody.velocity.x, playerStats.jumpHeight * 1.3f);
+                        isCharged = false;
+                        isCharging = false;
+                    }
+                }
+            }
+
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                if (powerManagement.powersUnlocked[2] && canUseSpecial == true)
+                {
+                    if (isFacingRight == true)
+                    {
+                        StartCoroutine(PhaseCoroutine(5));
+                    }
+                    if (isFacingRight == false)
+                    {
+                        StartCoroutine(PhaseCoroutine(5));
+                    }
+
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                if (powerManagement.powersUnlocked[4])
+                {
+                    if (hasPutMaskOn == false)
+                    {
+                        mask = gameObject.transform.Find("Mask(Clone)");
+                        mask.gameObject.SetActive(true);
+                        hasPutMaskOn = true;
+                    }
+                    else
+                    {
+                        mask.gameObject.SetActive(false);
+                        hasPutMaskOn = false;
+                    }
+                    //disguise 
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                if (powerManagement.powersUnlocked[5])
+                {
+                    StartCoroutine(Hacking());
+
+
+                }
             }
         }
+       
         
     }
 
     void ItemControls()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && powerManagement.itemsUnlocked[0] == true)
+       if(GetIsPaused() == false)
         {
-            Debug.Log("Map");
-            mapPanel.SetActive(true);
-            Time.timeScale = 0f;  
-            
-        }
-        else if(Input.GetKeyDown(KeyCode.Mouse0) && powerManagement.itemsUnlocked[0] == false)
-        {
-            Debug.Log("No Maps");
-        }
-
-        if(Input.GetKeyDown(KeyCode.U) && powerManagement.itemsUnlocked[2] == true && canUseSpecial == true)
-        {
-            Instantiate(bomb, transform.position, Quaternion.identity);
-            StartCoroutine(Cooldown()); 
-        }
-
-        if(Input.GetKey(KeyCode.M) && powerManagement.itemsUnlocked[1] == true && canUseSpecial == true )
-        {
-            isMultipleChoice = true; 
-        //    if(Input.GetKey(KeyCode.W) && isMultipleChoice == true)
-        //    {
-        //        Instantiate(drone, transform.position, Quaternion.identity);
-        //        isMultipleChoice = false; 
-        //    }
-        //    if(Input.GetKey(KeyCode.S) && isMultipleChoice == true)
-        //    {
-        //        Instantiate(dog, transform.position, Quaternion.identity);
-        //        isMultipleChoice = true; 
-        //    }
-            
-        //    StartCoroutine(Cooldown());
-        }
-
-        if(isMultipleChoice == true && canMove == true)
-        {
-            if (Input.GetKey(KeyCode.W) && isMultipleChoice == true)
+            if (Input.GetKeyDown(KeyCode.M) && powerManagement.itemsUnlocked[0] == true)
             {
-                Instantiate(drone, transform.position, Quaternion.identity);
-                isMultipleChoice = false;               
+                Debug.Log("Map");
+                mapPanel.SetActive(true);
+                Time.timeScale = 0f;
+
             }
-            if (Input.GetKey(KeyCode.S) && isMultipleChoice == true)
+            else if (Input.GetKeyDown(KeyCode.M) && powerManagement.itemsUnlocked[0] == false)
             {
-                Instantiate(dog, transform.position, Quaternion.Euler(new Vector3(0, 0, 89.31f)));
-                isMultipleChoice = false;
+                Debug.Log("No Maps");
             }
-            StartCoroutine(Cooldown());
-        }
-        if (Input.GetKeyDown(KeyCode.Period) && powerManagement.itemsUnlocked[3] == true)
-        {
-            Instantiate(bullet, firePoint.position, firePoint.rotation);
-        }
-        if (Input.GetKeyDown(KeyCode.B) && powerManagement.itemsUnlocked[4] == true && canUseSpecial == true)
-        {
-            Instantiate(starPlatinum, transform.position, transform.rotation);
-            StartCoroutine(Cooldown());
-        }
-        if(powerManagement.itemsUnlocked[5] == true)
-        {
-            gameObject.GetComponent<GauntletScript>().enabled = true;
-            powerManagement.itemsUnlocked[5] = false;
+
+            if (Input.GetKeyDown(KeyCode.U) && powerManagement.itemsUnlocked[2] == true && canUseSpecial == true)
+            {
+                Instantiate(bomb, transform.position, Quaternion.identity);
+                StartCoroutine(Cooldown());
+            }
+
+            if (Input.GetKey(KeyCode.N) && powerManagement.itemsUnlocked[1] == true && canUseSpecial == true)
+            {
+                isMultipleChoice = true;
+                //    if(Input.GetKey(KeyCode.W) && isMultipleChoice == true)
+                //    {
+                //        Instantiate(drone, transform.position, Quaternion.identity);
+                //        isMultipleChoice = false; 
+                //    }
+                //    if(Input.GetKey(KeyCode.S) && isMultipleChoice == true)
+                //    {
+                //        Instantiate(dog, transform.position, Quaternion.identity);
+                //        isMultipleChoice = true; 
+                //    }
+
+                //    StartCoroutine(Cooldown());
+            }
+            if(Input.GetKeyUp(KeyCode.N) && powerManagement.itemsUnlocked[1])
+            {
+                isMultipleChoice = false; 
+            }
+
+            if (isMultipleChoice == true && canMove == true)
+            {
+                if (Input.GetKey(KeyCode.Keypad8) && isMultipleChoice == true)
+                {
+                    Instantiate(drone, transform.position, Quaternion.identity);
+                    isMultipleChoice = false;
+                }
+                if (Input.GetKey(KeyCode.Keypad2) && isMultipleChoice == true)
+                {
+                    Instantiate(dog, transform.position, Quaternion.Euler(new Vector3(0, 0, 89.31f)));
+                    isMultipleChoice = false;
+                }
+                StartCoroutine(Cooldown());
+            }
+            if (Input.GetKeyDown(KeyCode.Period) && powerManagement.itemsUnlocked[3] == true)
+            {
+                Instantiate(bullet, firePoint.position, firePoint.rotation);
+            }
+            if (Input.GetKeyDown(KeyCode.B) && powerManagement.itemsUnlocked[4] == true && canUseSpecial == true)
+            {
+                Instantiate(starPlatinum, transform.position, transform.rotation);
+                StartCoroutine(Cooldown());
+            }
+            if (powerManagement.itemsUnlocked[5] == true)
+            {
+                gameObject.GetComponent<GauntletScript>().enabled = true;
+                powerManagement.itemsUnlocked[5] = false;
+            }
         }
     }
 
@@ -331,7 +350,18 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-           
+            rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+            spriteRenderer.enabled = false;
+            collider.enabled = false;
+            yield return new WaitForSeconds(1f);
+            transform.Translate(moveAmount, 0, 0);
+
+
+
+            rigidbody.constraints = RigidbodyConstraints2D.None;
+            rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+            spriteRenderer.enabled = true;
+            collider.enabled = true;
         }
         StartCoroutine(Cooldown()); 
        
@@ -350,4 +380,10 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(2f);
         canUseSpecial = true; 
     }
+
+    public bool GetIsPaused()
+    {
+        return PlayerUIManager.Instance.isPaused; 
+    }
+
 }

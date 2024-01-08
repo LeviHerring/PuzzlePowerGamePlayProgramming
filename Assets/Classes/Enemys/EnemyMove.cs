@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
-using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 

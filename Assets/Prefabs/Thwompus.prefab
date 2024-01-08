@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 6272725855933281386}
   - component: {fileID: 4817416840305922887}
   - component: {fileID: 1427533632244712625}
+  - component: {fileID: 5296154075148850913}
   m_Layer: 0
   m_Name: Thwompus
   m_TagString: Enemy
@@ -213,10 +214,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasBeenChecked: 0
   isDead: 0
-  health: 20
-  maxHealth: 0
+  health: 6
+  maxHealth: 6
   enemyName: thompus
-  damageDealt: 10
+  damageDealt: 5
   speed: 0
   xpValue: 5
   xp: {fileID: 8516684812663103485, guid: e05d6892689d7b342b6b61f3b28633f3, type: 3}
@@ -312,6 +313,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &5296154075148850913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5013061138321132688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58adfb6c8060b874db6a1ffa6d5b4a89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5451303822434746263
 GameObject:
   m_ObjectHideFlags: 0

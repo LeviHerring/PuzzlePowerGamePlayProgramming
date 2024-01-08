@@ -167,7 +167,7 @@ MonoBehaviour:
   hasBeenChecked: 0
   isDead: 0
   health: 6
-  maxHealth: 0
+  maxHealth: 6
   enemyName: Goblin
   damageDealt: 1
   speed: 0.5

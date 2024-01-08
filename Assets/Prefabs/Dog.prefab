@@ -273,7 +273,7 @@ MonoBehaviour:
   imageObject: {fileID: 0}
   metre: {fileID: 0}
   height: 5
-  speed: 3
+  speed: 6
   timeLeftAlive: 10
   groundCheck: {fileID: 2174241123052942122}
   groundLayer:
